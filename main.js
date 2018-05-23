@@ -3,6 +3,8 @@ function loadDocument(){
     addClickHandlers();
     highlightCurrentPlayer();
 }
+var currentPlayer = true;
+
 function addClickHandlers(){
     $(".column").click(columnClicked);
     $(".powerupButton").click(powerupButtonClicked);
@@ -25,7 +27,41 @@ function powerupButtonClicked(){
 }
 
 function resetButtonClicked(){
+};
+function characterChoiceClicked(){
+};
+// Player Info
+var characters = {
+    mario: {
+        name: 'Mario',
+        characterPowerup: powerupPatternCheckInvertV,
+        // characterSound1: blank, 
+        // characterSound1: blank,
+        // characterWinSound: blank,
+        characterToken: 'images/coin.png', 
+    },
+};
+function Player(inputName, inputCharacterType){
+    this.name = inputName;
+    this.characterType = inputCharacterType;
 }
+var player1 = new Player("peter", characters.mario);
+var player2 = new Player("steffany", characters.mario);
+
+// Player Turn Toggle
+function togglePlayerTurn(){
+    debugger;
+    if(currentPlayer){
+        $(".playerName").text(player1.name);
+    } else {
+        $(".playerName").text(player2.name);
+    }
+    $(".playerTurnModal").removeClass('hiddenElement');
+    setTimeout(function(){
+        $(".playerTurnModal").addClass('hiddenElement')
+        }, 2000);
+}
+
 
 //########################################## GLOBAL VARIABLES ###################################
 var gameBoardArray = [  ['x','','','','',''],
@@ -49,6 +85,9 @@ function tokenPlacementCheck( inputPlayerToken, inputStartCol, inputStartRow ) {
     var testb = winPatternCheck( inputPlayerToken, inputStartCol, inputStartRow  );
     console.log("powerup: ", testa);
     console.log("winPatternCheck: ", testb);
+    if(!testb){
+        togglePlayerTurn();
+    }
 }
 
 function validPosition(targetCol,targetRow){
