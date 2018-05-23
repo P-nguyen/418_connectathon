@@ -1,5 +1,9 @@
+/* Placeholder for fontface */
+
+/* Main Layout Styling Classes */
 body {
     width: 100%;
+    margin: 0;
 }
 .mainContainer {
     width: 100%;
@@ -7,19 +11,21 @@ body {
     text-align: center;
 
 }
+.header {
+    height: 10%;
+    width: 100%;
+    background-color: blue;
+}
+.footer {
+    height: 10%;
+    width: 100%;
+    background-color: blue;
+}
 .sideBar {
     display: inline-block;
     background-color: purple;
     width: 9%;
     margin: auto;
-}
-.header {
-    height: 10%;
-    background-color: blue;
-}
-.footer {
-    height: 10%;
-    background-color: blue;
 }
 #gameBoard {
     display: inline-grid;
@@ -27,5 +33,75 @@ body {
     height: 78%;
     width: 81%;
     margin: auto;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);   
+}
+#gameBoard > div {
+    border: black solid 1px;
+    width: 100%;
+    height: 100%; 
+}
+#gameBoard > .tokenDropArea {
+    background-color: yellow;
+}
+.column1 {
+}
+.column2 {
+}
+.column3 {
+}
+.column4 {
+}
+.column5 {
+}
+.column6 {
+}
+.column7 {
+}
+.emptyLocation {
+    /* Use for 'blank space' view */
+}
 
+/* Player Classes */
+.highlightCurrentPlayer {
+}
+
+/* Token State Classes*/
+.player1TokenShowing {
+}
+.player2TokenShowing {
+}
+/* Token Falling animation */
+/* Power Up Classes */
+.player1PowerUpBoardHighlight {
+}
+.player2PowerUpBoardHighlight {
+}
+.powerUpButton{
+}
+
+/* Reset Classes */
+.resetButton{
+}
+
+/* Modal Classes */
+.beginGameModal{ 
+}
+.gameWinModal{ 
+}
+.playerSwitchModal{  
+}
+
+
+
+
+
+/* Media Query Classes */
+@media screen and (max-width: 480px) {
+    .sideBar {
+        display: none;
+    }
+    #gameBoard {
+        width: 100%; 
+    }
 }
