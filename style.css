@@ -124,7 +124,8 @@ body {
 }
 .gameWinModal{ 
 }
-.playerSwitchModal{  
+.hiddenElement {
+    display: none;
 }
 
 

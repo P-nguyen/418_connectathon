@@ -2,7 +2,7 @@ $(document).ready(loadDocument);
 function loadDocument(){
     addClickHandlers();
 }
-var playerTurnTracker = null;
+var currentPlayer = true;
 
 function addClickHandlers(){
     $(".column").click(columnClicked);
@@ -20,9 +20,6 @@ function powerupButtonClicked(){
 }
 
 function resetButtonClicked(){
-<<<<<<< HEAD
-}
-=======
 };
 function characterChoiceClicked(){
 };
@@ -41,15 +38,23 @@ function Player(inputName, inputCharacterType){
     this.name = inputName;
     this.characterType = inputCharacterType;
 }
-var player1 = new Player(name, characters.mario);
-var player2 = new Player(name, characters.mario);
+var player1 = new Player("peter", characters.mario);
+var player2 = new Player("steffany", characters.mario);
 
 // Player Turn Toggle
 function togglePlayerTurn(){
-        $(".playerTurnModal span").text(playerTurnTracker);
+    debugger;
+    if(currentPlayer){
+        $(".playerName").text(player1.name);
+    } else {
+        $(".playerName").text(player2.name);
+    }
+    $(".playerTurnModal").removeClass('hiddenElement');
+    setTimeout(function(){
+        $(".playerTurnModal").addClass('hiddenElement')
+        }, 2000);
 }
 
->>>>>>> playerObjects
 
 //########################################## GLOBAL VARIABLES ###################################
 var gameBoardArray = [  ['x','','','','',''],
@@ -73,6 +78,9 @@ function tokenPlacementCheck( inputPlayerToken, inputStartCol, inputStartRow ) {
     var testb = winPatternCheck( inputPlayerToken, inputStartCol, inputStartRow  );
     console.log("powerup: ", testa);
     console.log("winPatternCheck: ", testb);
+    if(!testb){
+        togglePlayerTurn();
+    }
 }
 
 function validPosition(targetCol,targetRow){
