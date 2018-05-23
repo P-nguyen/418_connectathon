@@ -1,28 +1,28 @@
 
-// var boardArray = [  ['','','','','',''],
+// var gameBoardArray = [  ['','','','','',''],
 // //                     ['','','','','',''],
 // //                     ['','','','','',''],
 // //                     ['','','','','',''],
 // //                     ['','','','','',''],
 // //                     ['','','','','',''],
 // //                     ['','','','','','']
-// // ]; //boardArray template
+// // ]; //gameBoardArray template
 
-var boardArray = [  ['','','','','',''],
+var gameBoardArray = [  ['','','','','',''],
                     ['','','','','',''],
                     ['','','','','',''],
                     ['','','','','',''],
                     ['','','','','',''],
                     ['','','','','',''],
                     ['','','','','','']
-]; //boardArray template
+]; //gameBoardArray template
 
 function validPosition(targetCol,targetRow){
 // function name = validPosition
 // parameters: targetCol, targetRow
-// return: value at position of boardArray, or if outside then return null
+// return: value at position of gameBoardArray, or if outside then return null
 if ( ((targetCol < 7) && (targetCol >= 0)) && (((targetCol >= 0)) && (targetRow < 6))){
-    return boardArray[targetCol][targetRow];
+    return gameBoardArray[targetCol][targetRow];
 } else {
         return null;
     }
@@ -32,7 +32,7 @@ if ( ((targetCol < 7) && (targetCol >= 0)) && (((targetCol >= 0)) && (targetRow 
 function powerupPatternCheckInvertV(playerXorO,startCol,startRow){
 //expected input parameters: playerXorO(the X or O in the array we are looking for), startCol(the Col position we are searching at), startRow(the Row position we are searching at)
 //expected output parameters: true(if we found a powerup pattern), false(if we didn't find a powerup pattern)
-//assuming we are working on boardArray[col][row]
+//assuming we are working on gameBoardArray[col][row]
 //would be nice to light on the board where the powerup match happened
 //     invert-v pattern - 1st check
 //     col +1, row +1
@@ -91,7 +91,6 @@ function winPatternCheck( inputPlayerToken, inputCoinPositionX, inputCoinPositio
 
     for (var i = 0; i < dir.length; i++) { //go clockwise around position and check to see if there is a 'X'
         //check if array at x;y is equal.
-        debugger;
         //this resets per loop
         var x = inputCoinPositionX;
         var y = inputCoinPositionY;
@@ -128,3 +127,22 @@ function winPatternCheck( inputPlayerToken, inputCoinPositionX, inputCoinPositio
 
 winPatternCheck( playerToken, 1, 3 );
 
+
+function dropTokenCol(player, location){
+    //dropping from player to location col
+    //return: null is full, row position where I placed token again
+    //doesn't need to check for out of bounds since the input is from the DOM, should always be valid
+    //need to show that the column is full
+    var lastIteminCol = gameBoardArray[location].indexOf('');
+    if (lastIteminCol > -1){
+        gameBoardArray[location][lastIteminCol] = player;
+
+        if ( lastIteminCol === gameBoardArray[location].length -1){
+            //this is the last open space in the column so trigger something
+            }
+
+        return lastIteminCol;
+    }else {
+        return null
+    }
+};
