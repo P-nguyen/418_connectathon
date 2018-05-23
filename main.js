@@ -1,11 +1,18 @@
 $(document).ready(loadDocument);
 function loadDocument(){
     addClickHandlers();
+    highlightCurrentPlayer();
 }
 function addClickHandlers(){
     $(".column").click(columnClicked);
     $(".powerupButton").click(powerupButtonClicked);
     $(".resetButton").click(resetButtonClicked);
+}
+
+//merge into steffany's toggle class.
+function highlightCurrentPlayer() {
+    $('#player1').addClass('highlightCurrentPlayer');
+    $('#player1').removeClass('highlightCurrentPlayer');
 }
 
 function columnClicked(){
