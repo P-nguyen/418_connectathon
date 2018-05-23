@@ -1,0 +1,134 @@
+/* Placeholder for fontface */
+
+/* Main Layout Styling Classes */
+body {
+    width: 100%;
+    margin: 0;
+}
+.mainContainer {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+
+}
+.header {
+    height: 10%;
+    width: 100%;
+    background-color: blue;
+}
+.footer {
+    height: 10%;
+    width: 100%;
+    background-color: blue;
+}
+.sideBar {
+    display: inline-block;
+    background-color: purple;
+    width: 9%;
+    margin: auto;
+}
+#gameBoard {
+    display: inline-grid;
+    background-color: green;
+    height: 78%;
+    width: 81%;
+    margin: auto;
+    grid-template-columns: repeat(7, 1fr);
+
+}
+#gameBoard > div > div {
+    border: black solid 1px;
+    width: 100%;
+    height: 100%; 
+}
+#gameBoard > div > .tokenDropArea {
+    background-color: yellow;
+}
+.column0 {
+    display: inline-grid;
+    background-color: green;
+    grid-template-rows: repeat(7, 1fr); 
+    width: 100%;
+    height: 100%;  
+}
+.column1 {
+    display: inline-grid;
+    background-color: green;
+    grid-template-rows: repeat(7, 1fr);  
+}
+.column2 {
+    display: inline-grid;
+    background-color: green;
+    grid-template-rows: repeat(7, 1fr);  
+}
+.column3 {
+    display: inline-grid;
+    background-color: green;
+    grid-template-rows: repeat(7, 1fr);  
+}
+.column4 {
+    display: inline-grid;
+    background-color: green;
+    grid-template-rows: repeat(7, 1fr);  
+}
+.column5 {
+    display: inline-grid;
+    background-color: green;
+    grid-template-rows: repeat(7, 1fr);  
+}
+.column6 {
+    display: inline-grid;
+    background-color: green;
+    grid-template-rows: repeat(7, 1fr);  
+}
+
+.emptyLocation {
+    /* Use for 'blank space' view */
+}
+.columnHighlight {
+    background-color: blueviolet;
+}
+
+/* Player Classes */
+.highlightCurrentPlayer {
+}
+
+/* Token State Classes*/
+.player1TokenShowing {
+}
+.player2TokenShowing {
+}
+/* Token Falling animation */
+/* Power Up Classes */
+.player1PowerUpBoardHighlight {
+}
+.player2PowerUpBoardHighlight {
+}
+.powerupButton{
+}
+
+/* Reset Classes */
+.resetButton{
+}
+
+/* Modal Classes */
+.beginGameModal{ 
+}
+.gameWinModal{ 
+}
+.playerSwitchModal{  
+}
+
+
+
+
+
+/* Media Query Classes */
+@media screen and (max-width: 480px) {
+    .sideBar {
+        display: none;
+    }
+    #gameBoard {
+        width: 100%; 
+    }
+}

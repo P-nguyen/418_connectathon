@@ -1,3 +1,22 @@
+$(document).ready(loadDocument);
+function loadDocument(){
+    addClickHandlers();
+}
+function addClickHandlers(){
+    $(".column").click(columnClicked);
+    $(".powerupButton").click(powerupButtonClicked);
+    $(".resetButton").click(resetButtonClicked);
+}
+
+function columnClicked(){
+    var columnClicked = null;
+        columnClicked = $(this).attr("column");
+        console.log(columnClicked);
+};
+function powerupButtonClicked(){
+};
+function resetButtonClicked(){
+};
 
 var gameBoardArray = [  ['x','','','','',''],
                     ['','x','','','',''],
@@ -113,6 +132,8 @@ function winPatternCheck( inputPlayerToken, inputStartCol, inputStartRow ){
                 connect4Counter = 1;
             }
         }
-    }
-    return result;
-}
+      }
+     return result;
+ }
+
+
