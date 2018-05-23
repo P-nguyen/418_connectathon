@@ -110,7 +110,6 @@ function winPatternCheck( inputPlayerToken, inputStartCol, inputStartRow ){
         var fullDirScanCounter = 0;
 
         while(fullDirScanCounter !== 2){
-            debugger;
             if(connect4Counter === winCount){
                 result = true;
                 return console.log("YAY YOU WIN");
