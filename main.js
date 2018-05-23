@@ -1,7 +1,7 @@
 $(document).ready(loadDocument);
 function loadDocument(){
     addClickHandlers();
-    highlightCurrentPlayer();
+    togglePlayerTurn();
 }
 var currentPlayer = true;
 
@@ -9,12 +9,6 @@ function addClickHandlers(){
     $(".column").click(columnClicked);
     $(".powerupButton").click(powerupButtonClicked);
     $(".resetButton").click(resetButtonClicked);
-}
-
-//merge into steffany's toggle class.
-function highlightCurrentPlayer() {
-    $('#player1').addClass('highlightCurrentPlayer');
-    $('#player1').removeClass('highlightCurrentPlayer');
 }
 
 function columnClicked(){
@@ -27,9 +21,11 @@ function powerupButtonClicked(){
 }
 
 function resetButtonClicked(){
-};
+}
+
 function characterChoiceClicked(){
-};
+}
+
 // Player Info
 var characters = {
     mario: {
@@ -40,7 +36,8 @@ var characters = {
         // characterWinSound: blank,
         characterToken: 'images/coin.png', 
     },
-};
+}
+
 function Player(inputName, inputCharacterType){
     this.name = inputName;
     this.characterType = inputCharacterType;
@@ -50,18 +47,22 @@ var player2 = new Player("steffany", characters.mario);
 
 // Player Turn Toggle
 function togglePlayerTurn(){
-    debugger;
     if(currentPlayer){
         $(".playerName").text(player1.name);
+        $('#player1').addClass('highlightCurrentPlayer');
+        $('#player2').removeClass('highlightCurrentPlayer');
     } else {
         $(".playerName").text(player2.name);
+        $('#player2').addClass('highlightCurrentPlayer');
+        $('#player1').removeClass('highlightCurrentPlayer');
     }
     $(".playerTurnModal").removeClass('hiddenElement');
     setTimeout(function(){
         $(".playerTurnModal").addClass('hiddenElement')
         }, 2000);
-}
 
+    currentPlayer = !currentPlayer;
+}
 
 //########################################## GLOBAL VARIABLES ###################################
 var gameBoardArray = [  ['x','','','','',''],
@@ -75,8 +76,6 @@ var gameBoardArray = [  ['x','','','','',''],
 
 var playerToken = 'x';
 var winCount = 4;
-
-tokenPlacementCheck(playerToken,2,2);
 
 function tokenPlacementCheck( inputPlayerToken, inputStartCol, inputStartRow ) {
     //function that will check current dropped token's surrounding.
@@ -183,8 +182,6 @@ function winPatternCheck( inputPlayerToken, inputStartCol, inputStartRow ){
     return result;
  }
 
-
-
 function dropTokenCol(inputPlayerToken, inputColLocation){
     //dropping from player to location col
     //return: null is full, row position where I placed token again
@@ -202,4 +199,7 @@ function dropTokenCol(inputPlayerToken, inputColLocation){
     }else {
         return null
     }
-};
+}
+
+
+//tokenPlacementCheck(playerToken,2,2);
