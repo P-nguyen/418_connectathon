@@ -2,6 +2,8 @@ $(document).ready(loadDocument);
 function loadDocument(){
     addClickHandlers();
 }
+var playerTurnTracker = null;
+
 function addClickHandlers(){
     $(".column").click(columnClicked);
     $(".powerupButton").click(powerupButtonClicked);
@@ -18,7 +20,36 @@ function powerupButtonClicked(){
 }
 
 function resetButtonClicked(){
+<<<<<<< HEAD
 }
+=======
+};
+function characterChoiceClicked(){
+};
+// Player Info
+var characters = {
+    mario: {
+        name: 'Mario',
+        characterPowerup: powerupPatternCheckInvertV,
+        // characterSound1: blank, 
+        // characterSound1: blank,
+        // characterWinSound: blank,
+        characterToken: 'images/coin.png', 
+    },
+};
+function Player(inputName, inputCharacterType){
+    this.name = inputName;
+    this.characterType = inputCharacterType;
+}
+var player1 = new Player(name, characters.mario);
+var player2 = new Player(name, characters.mario);
+
+// Player Turn Toggle
+function togglePlayerTurn(){
+        $(".playerTurnModal span").text(playerTurnTracker);
+}
+
+>>>>>>> playerObjects
 
 //########################################## GLOBAL VARIABLES ###################################
 var gameBoardArray = [  ['x','','','','',''],
