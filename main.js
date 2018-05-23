@@ -55,35 +55,6 @@ if ( ((targetCol < 7) && (targetCol >= 0)) && (((targetCol >= 0)) && (targetRow 
     }
 }
 
-function powerupPatternCheckInvertV(playerXorO,startCol,startRow) {
-    //expected input parameters: playerXorO(the X or O in the array we are looking for), startCol(the Col position we are searching at), startRow(the Row position we are searching at)
-    //expected output parameters: true(if we found a powerup pattern), false(if we didn't find a powerup pattern)
-    //assuming we are working on gameBoardArray[col][row]
-    //would be nice to light on the board where the powerup match happened
-    //     invert-v pattern - 1st check
-    //     col +1, row +1
-    //     col +2, row +0
-    //
-    //     invert-v pattern - 2nd check
-    //     col -1, row -1
-    //     col +1, row -1
-    //
-    //     invert-v pattern - 3rd check
-    //     col +1, row +1
-    //     col +2, row +0
-    var foundPowerupPattern = false;
-    if ((validPosition(startCol + 1, startRow + 1) === playerXorO) && (validPosition(startCol + 2, startRow) === playerXorO)) {
-        //1st check
-        foundPowerupPattern = true;
-    } else if ((validPosition(startCol - 1, startRow - 1) === playerXorO) && (validPosition(startCol + 1, startRow - 1) === playerXorO)) {
-        //2nd check
-        foundPowerupPattern = true;
-    } else if ((validPosition(startCol - 1, startRow + 1) === playerXorO) && (validPosition(startCol - 2, startRow) === playerXorO)) {
-        //3rd check
-        foundPowerupPattern = true;
-    }
-}
-
 function powerupPatternCheckInvertV( inputPlayerToken,inputStartCol,inputStartRow ){
     //input parameters: inputPlayerToken(the X or O in the array we are looking for), inputStartCol(the Col position we are searching at), inputStartRow(the Row position we are searching at)
     //output parameters: true(if we found a powerup pattern), false(if we didn't find a powerup pattern)
