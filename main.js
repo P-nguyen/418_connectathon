@@ -1,7 +1,10 @@
 $(document).ready(loadDocument);
 function loadDocument(){
     addClickHandlers();
+    togglePlayerTurn();
 }
+var currentPlayer = true;
+
 function addClickHandlers(){
     $(".column").click(columnClicked);
     $(".powerupButton").click(powerupButtonClicked);
@@ -20,6 +23,47 @@ function powerupButtonClicked(){
 function resetButtonClicked(){
 }
 
+function characterChoiceClicked(){
+}
+
+// Player Info
+var characters = {
+    mario: {
+        name: 'Mario',
+        characterPowerup: powerupPatternCheckInvertV,
+        // characterSound1: blank, 
+        // characterSound1: blank,
+        // characterWinSound: blank,
+        characterToken: 'images/coin.png', 
+    },
+}
+
+function Player(inputName, inputCharacterType){
+    this.name = inputName;
+    this.characterType = inputCharacterType;
+}
+var player1 = new Player("peter", characters.mario);
+var player2 = new Player("steffany", characters.mario);
+
+// Player Turn Toggle
+function togglePlayerTurn(){
+    if(currentPlayer){
+        $(".playerName").text(player1.name);
+        $('#player1').addClass('highlightCurrentPlayer');
+        $('#player2').removeClass('highlightCurrentPlayer');
+    } else {
+        $(".playerName").text(player2.name);
+        $('#player2').addClass('highlightCurrentPlayer');
+        $('#player1').removeClass('highlightCurrentPlayer');
+    }
+    $(".playerTurnModal").removeClass('hiddenElement');
+    setTimeout(function(){
+        $(".playerTurnModal").addClass('hiddenElement')
+        }, 2000);
+
+    currentPlayer = !currentPlayer;
+}
+
 //########################################## GLOBAL VARIABLES ###################################
 var gameBoardArray = [  ['x','','','','',''],
                         ['','x','','','',''],
@@ -33,8 +77,6 @@ var gameBoardArray = [  ['x','','','','',''],
 var playerToken = 'x';
 var winCount = 4;
 
-tokenPlacementCheck(playerToken,2,2);
-
 function tokenPlacementCheck( inputPlayerToken, inputStartCol, inputStartRow ) {
     //function that will check current dropped token's surrounding.
     //result:
@@ -42,6 +84,9 @@ function tokenPlacementCheck( inputPlayerToken, inputStartCol, inputStartRow ) {
     var testb = winPatternCheck( inputPlayerToken, inputStartCol, inputStartRow  );
     console.log("powerup: ", testa);
     console.log("winPatternCheck: ", testb);
+    if(!testb){
+        togglePlayerTurn();
+    }
 }
 
 function validPosition(targetCol,targetRow){
@@ -137,8 +182,6 @@ function winPatternCheck( inputPlayerToken, inputStartCol, inputStartRow ){
     return result;
  }
 
-
-
 function dropTokenCol(inputPlayerToken, inputColLocation){
     //dropping from player to location col
     //return: null is full, row position where I placed token again
@@ -156,10 +199,14 @@ function dropTokenCol(inputPlayerToken, inputColLocation){
     }else {
         return null
     }
-};
+
+}
 
 function showTokenOnDOM(inputPlayerTokenImg, inputColLocation, inputRowLocation){
     var col = '[column='+inputColLocation+'][row='+inputRowLocation+']';
     $(col).addClass('player1TokenShowing');
 
-};
+}
+
+//tokenPlacementCheck(playerToken,2,2);
+
