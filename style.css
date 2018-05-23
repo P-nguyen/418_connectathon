@@ -34,9 +34,9 @@ body {
     width: 81%;
     margin: auto;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(7, 1fr);   
+
 }
-#gameBoard > div {
+#gameBoard > div > div {
     border: black solid 1px;
     width: 100%;
     height: 100%; 
@@ -44,22 +44,49 @@ body {
 #gameBoard > .tokenDropArea {
     background-color: yellow;
 }
+.column0 {
+    display: inline-grid;
+    background-color: green;
+    grid-template-rows: repeat(7, 1fr); 
+    width: 100%;
+    height: 100%;  
+}
 .column1 {
+    display: inline-grid;
+    background-color: green;
+    grid-template-rows: repeat(7, 1fr);  
 }
 .column2 {
+    display: inline-grid;
+    background-color: green;
+    grid-template-rows: repeat(7, 1fr);  
 }
 .column3 {
+    display: inline-grid;
+    background-color: green;
+    grid-template-rows: repeat(7, 1fr);  
 }
 .column4 {
+    display: inline-grid;
+    background-color: green;
+    grid-template-rows: repeat(7, 1fr);  
 }
 .column5 {
+    display: inline-grid;
+    background-color: green;
+    grid-template-rows: repeat(7, 1fr);  
 }
 .column6 {
+    display: inline-grid;
+    background-color: green;
+    grid-template-rows: repeat(7, 1fr);  
 }
-.column7 {
-}
+
 .emptyLocation {
     /* Use for 'blank space' view */
+}
+.columnHighlight {
+    background-color: blueviolet;
 }
 
 /* Player Classes */
