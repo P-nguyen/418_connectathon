@@ -95,8 +95,10 @@ body {
 
 /* Token State Classes*/
 .player1TokenShowing {
+    background-color: red;
 }
 .player2TokenShowing {
+    background-color: orangered;
 }
 /* Token Falling animation */
 /* Power Up Classes */

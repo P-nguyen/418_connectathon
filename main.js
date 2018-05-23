@@ -157,3 +157,9 @@ function dropTokenCol(inputPlayerToken, inputColLocation){
         return null
     }
 };
+
+function showTokenOnDOM(inputPlayerTokenImg, inputColLocation, inputRowLocation){
+    var col = '[column='+inputColLocation+'][row='+inputRowLocation+']';
+    $(col).addClass('player1TokenShowing');
+
+};
