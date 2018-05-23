@@ -17,6 +17,22 @@ function powerupButtonClicked(){
 };
 function resetButtonClicked(){
 };
+function characterChoiceClicked(){
+};
+var characters = {
+    mario: {
+        name: 'Mario',
+        characterPowerup: powerupPatternCheckInvertV,
+        characterSound1: blank, 
+        characterSound1: blank,
+        characterWinSound: blank,
+        characterToken: blank, 
+    },
+};
+var player1 = {
+    
+};
+var player2 = {};
 
 // var boardArray = [  ['','','','','',''],
 // //                     ['','','','','',''],
