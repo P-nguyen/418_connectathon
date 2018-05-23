@@ -93,8 +93,27 @@ body {
     background-color: blueviolet;
 }
 
+
 /* Player Related Classes */
+.playerColumn{
+    vertical-align: top;
+    display: inline-block;
+    width: 33%;
+    height: 100px;
+}
+.playerColumn h2{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.playerImg{
+    height: 50px;
+    width: 50px;
+    margin: auto;
+    background-color: hotpink;
+}
+
 .highlightCurrentPlayer {
+    background-color: yellow;
 }
 .playerTurnModal {
 }
