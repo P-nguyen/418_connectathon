@@ -41,7 +41,7 @@ body {
     width: 100%;
     height: 100%; 
 }
-#gameBoard > .tokenDropArea {
+#gameBoard > div > .tokenDropArea {
     background-color: yellow;
 }
 .column0 {
@@ -104,7 +104,7 @@ body {
 }
 .player2PowerUpBoardHighlight {
 }
-.powerUpButton{
+.powerupButton{
 }
 
 /* Reset Classes */
