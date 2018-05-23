@@ -1,7 +1,7 @@
 //local variables
-var a = [
-    ['','','','x'],
-    ['','','x',''],
+var array = [
+    ['','x','','x'],
+    ['x','x','x','x'],
     ['','x','',''],
     ['','','','']]
 
@@ -11,9 +11,11 @@ var playerToken = 'x';
 //
 // }
 
+var winCount = 3;
 
-function winPatternCheck( inputCoinPositionX, inputCoinPositionY ){
-//takes in current coin position
+function winPatternCheck( inputPlayerToken, inputCoinPositionX, inputCoinPositionY ){
+//takes in current coin positionX and Y
+
 // this will set direction clockwise = starting at 12:00 || X,Y
     var dir = [
         [0,1],
@@ -21,12 +23,7 @@ function winPatternCheck( inputCoinPositionX, inputCoinPositionY ){
         [1,0],
         [1,-1]];
 
-    //these are global
     var connect4Counter = 1;
-    var winCount = 3;
-    //these are global
-
-
 
     for (var i = 0; i < dir.length; i++) { //go clockwise around position and check to see if there is a 'X'
         //check if array at x;y is equal.
@@ -42,19 +39,20 @@ function winPatternCheck( inputCoinPositionX, inputCoinPositionY ){
             }
             x += dir[i][0];
             y += dir[i][1];
-            if (a[x][y] === 'x'){
-                console.log(i, a[x][y]);
+            //james out of bound function. || return the item or null;
+            if (array[x][y] === inputPlayerToken){
+                console.log(i, array[x][y]);
                 connect4Counter++;
             }else if(fullDirScanCounter === 0){
                 //reset x and y
                 x = inputCoinPositionX;
                 y = inputCoinPositionY;
-                //reverse
+                //reverse direction of travel
                 dir[i][0] *= -1;
                 dir[i][1] *= -1;
                 fullDirScanCounter++;
             }else{
-                //increment fullDirScanCounter to 2 and kick us out of whileloop.
+                //increment fullDirScanCounter to 2 and kick us out of while loop.
                 fullDirScanCounter++;
                 //reset counter since there is no match.
                 connect4Counter = 1;
@@ -64,13 +62,4 @@ function winPatternCheck( inputCoinPositionX, inputCoinPositionY ){
     }
 }
 
-//1 check top square.
-//if x then move there. //add to counter.
-//and check next square in the same direction.
-//keep going until you it !'x'
-
-//if not x set firstDirScan to true; go back to inputCoinPositionX and Y
-//reverse direction and go that direction. until !'x' and set secondDirScan to true
-//exit loop.
-
-winPatternCheck(1,2);
+winPatternCheck( playerToken, 1, 3 );
