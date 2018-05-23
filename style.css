@@ -1,0 +1,31 @@
+body {
+    width: 100%;
+}
+.mainContainer {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+
+}
+.sideBar {
+    display: inline-block;
+    background-color: purple;
+    width: 9%;
+    margin: auto;
+}
+.header {
+    height: 10%;
+    background-color: blue;
+}
+.footer {
+    height: 10%;
+    background-color: blue;
+}
+#gameBoard {
+    display: inline-grid;
+    background-color: green;
+    height: 78%;
+    width: 81%;
+    margin: auto;
+
+}
