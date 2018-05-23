@@ -8,21 +8,6 @@ function addClickHandlers(){
     $(".resetButton").click(resetButtonClicked);
 }
 
-<<<<<<< HEAD
-// var gameBoardArray = [  ['','','','','',''],
-// //                     ['','','','','',''],
-// //                     ['','','','','',''],
-// //                     ['','','','','',''],
-// //                     ['','','','','',''],
-// //                     ['','','','','',''],
-// //                     ['','','','','','']
-// // ]; //gameBoardArray template
-
-var gameBoardArray = [  ['','','','','',''],
-                    ['','','','','',''],
-                    ['','','','','',''],
-                    ['','','','','',''],
-=======
 function columnClicked(){
     var columnClicked = null;
         columnClicked = $(this).attr("column");
@@ -37,16 +22,14 @@ function resetButtonClicked(){
 
 //########################################## GLOBAL VARIABLES ###################################
 var gameBoardArray = [  ['x','','','','',''],
-                    ['','x','','','',''],
-                    ['','','x','','',''],
-                    ['','','','x','',''],
->>>>>>> c8bdd97ce896cdb3489130ac9151c6f5513df50d
-                    ['','','','','',''],
-                    ['','','','','',''],
-                    ['','','','','','']
+                        ['','x','','','',''],
+                        ['','','x','','',''],
+                        ['','x','','','',''],
+                        ['','','','','',''],
+                        ['','','','','',''],
+                        ['','','','','','']
 ]; //gameBoardArray template
-<<<<<<< HEAD
-=======
+
 var playerToken = 'x';
 var winCount = 4;
 
@@ -61,15 +44,10 @@ function tokenPlacementCheck( inputPlayerToken, inputStartCol, inputStartRow ) {
     console.log("winPatternCheck: ", testb);
 }
 
->>>>>>> c8bdd97ce896cdb3489130ac9151c6f5513df50d
-
 function validPosition(targetCol,targetRow){
 // parameters: targetCol, targetRow
 // return: value at position of gameBoardArray, or if outside then return null
-<<<<<<< HEAD
-=======
 
->>>>>>> c8bdd97ce896cdb3489130ac9151c6f5513df50d
 if ( ((targetCol < 7) && (targetCol >= 0)) && (((targetCol >= 0)) && (targetRow < 6))){
     return gameBoardArray[targetCol][targetRow];
 } else {
@@ -77,37 +55,36 @@ if ( ((targetCol < 7) && (targetCol >= 0)) && (((targetCol >= 0)) && (targetRow 
     }
 }
 
-
-<<<<<<< HEAD
-function powerupPatternCheckInvertV(playerXorO,startCol,startRow){
-//expected input parameters: playerXorO(the X or O in the array we are looking for), startCol(the Col position we are searching at), startRow(the Row position we are searching at)
-//expected output parameters: true(if we found a powerup pattern), false(if we didn't find a powerup pattern)
-//assuming we are working on gameBoardArray[col][row]
-//would be nice to light on the board where the powerup match happened
-//     invert-v pattern - 1st check
-//     col +1, row +1
-//     col +2, row +0
-//
-//     invert-v pattern - 2nd check
-//     col -1, row -1
-//     col +1, row -1
-//
-//     invert-v pattern - 3rd check
-//     col +1, row +1
-//     col +2, row +0
-var foundPowerupPattern = false;
-if ( (validPosition(startCol+1,startRow+1) === playerXorO) && (validPosition(startCol+2,startRow) === playerXorO) ){
-    //1st check
-    foundPowerupPattern = true;
-} else if ( (validPosition(startCol-1,startRow-1) === playerXorO) && (validPosition(startCol+1,startRow-1) === playerXorO) ){
-    //2nd check
-    foundPowerupPattern = true;
-} else if ( (validPosition(startCol-1,startRow+1) === playerXorO) && (validPosition(startCol-2,startRow) === playerXorO) ){
-    //3rd check
-    foundPowerupPattern = true;
+function powerupPatternCheckInvertV(playerXorO,startCol,startRow) {
+    //expected input parameters: playerXorO(the X or O in the array we are looking for), startCol(the Col position we are searching at), startRow(the Row position we are searching at)
+    //expected output parameters: true(if we found a powerup pattern), false(if we didn't find a powerup pattern)
+    //assuming we are working on gameBoardArray[col][row]
+    //would be nice to light on the board where the powerup match happened
+    //     invert-v pattern - 1st check
+    //     col +1, row +1
+    //     col +2, row +0
+    //
+    //     invert-v pattern - 2nd check
+    //     col -1, row -1
+    //     col +1, row -1
+    //
+    //     invert-v pattern - 3rd check
+    //     col +1, row +1
+    //     col +2, row +0
+    var foundPowerupPattern = false;
+    if ((validPosition(startCol + 1, startRow + 1) === playerXorO) && (validPosition(startCol + 2, startRow) === playerXorO)) {
+        //1st check
+        foundPowerupPattern = true;
+    } else if ((validPosition(startCol - 1, startRow - 1) === playerXorO) && (validPosition(startCol + 1, startRow - 1) === playerXorO)) {
+        //2nd check
+        foundPowerupPattern = true;
+    } else if ((validPosition(startCol - 1, startRow + 1) === playerXorO) && (validPosition(startCol - 2, startRow) === playerXorO)) {
+        //3rd check
+        foundPowerupPattern = true;
+    }
 }
-=======
-function powerupPatternCheckInvertV( inputPlayerToken,inputStartCol,inputStartRow ){ 
+
+function powerupPatternCheckInvertV( inputPlayerToken,inputStartCol,inputStartRow ){
     //input parameters: inputPlayerToken(the X or O in the array we are looking for), inputStartCol(the Col position we are searching at), inputStartRow(the Row position we are searching at)
     //output parameters: true(if we found a powerup pattern), false(if we didn't find a powerup pattern)
 
@@ -135,7 +112,6 @@ function powerupPatternCheckInvertV( inputPlayerToken,inputStartCol,inputStartRo
         //3rd check
         foundPowerupPattern = true;
     }
->>>>>>> c8bdd97ce896cdb3489130ac9151c6f5513df50d
 
     return foundPowerupPattern;
 }
@@ -192,16 +168,16 @@ function winPatternCheck( inputPlayerToken, inputStartCol, inputStartRow ){
 
 
 
-function dropTokenCol(player, location){
+function dropTokenCol(inputPlayerToken, inputColLocation){
     //dropping from player to location col
     //return: null is full, row position where I placed token again
     //doesn't need to check for out of bounds since the input is from the DOM, should always be valid
     //need to show that the column is full
-    var lastIteminCol = gameBoardArray[location].indexOf('');
+    var lastIteminCol = gameBoardArray[inputColLocation].indexOf('');
     if (lastIteminCol > -1){
-        gameBoardArray[location][lastIteminCol] = player;
+        gameBoardArray[inputColLocation][lastIteminCol] = inputPlayerToken;
 
-        if ( lastIteminCol === gameBoardArray[location].length -1){
+        if ( lastIteminCol === gameBoardArray[inputColLocation].length -1){
             //this is the last open space in the column so trigger something
             }
 
