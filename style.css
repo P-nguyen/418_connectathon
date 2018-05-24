@@ -71,7 +71,10 @@ body {
 #gameBoard > div > div {
     /* border: black solid 1px; */
     width: 100%;
-    height: 100%; 
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 #gameBoard > div > .tokenDropArea {
     /* background-color: yellow; */
@@ -245,6 +248,16 @@ body {
 }
 
 
+/*Character Classes
+these class is linked to character object .characterToken*/
+
+.mario{
+    background-image: url("images/TokenPng/MarioToken.png");
+}
+
+.luigi{
+    background-image: url("images/TokenPng/LuigiToken.png");
+}
 
 
 

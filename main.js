@@ -213,7 +213,7 @@ function dropTokenCol(inputPlayer, inputColLocation){
             //this is the last open space in the column so trigger something
         }
 
-        showTokenOnDOM( playerToken, inputColLocation, lastIteminCol );
+        showTokenOnDOM( inputColLocation, lastIteminCol );
         return lastIteminCol;
     }else {
         return null
@@ -221,14 +221,9 @@ function dropTokenCol(inputPlayer, inputColLocation){
 
 }
 
-function showTokenOnDOM(inputPlayerTokenImg, inputColLocation, inputRowLocation){
+function showTokenOnDOM( inputColLocation, inputRowLocation){
     var col = '[column='+inputColLocation+'][row='+inputRowLocation+']';
-
-    if(currentPlayerStatus){ //if currentPlayerStatus = true then player 1
-        $(col).addClass('player1TokenShowing');
-    } else {
-        $(col).addClass('player2TokenShowing');
-    }
+    $(col).addClass(currentPlayer.characterType.characterToken);
 
 }
 
