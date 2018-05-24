@@ -6,7 +6,7 @@ var player1 = null;
 var player2 = null;
 
 var currentPlayer = player1;
-var currentPlayerStatus = true;
+var currentPlayerStatus = true; // true is player 1 and false is player 2
 var screenClickable = true;
 
 
@@ -31,7 +31,7 @@ function loadDocument(){
 
 function addClickHandlers(){
     $(".column").click(columnClicked);
-    $(".powerupButton").click(powerupButtonClicked);
+    $(".playerColumn img").click(powerupButtonClicked); // sets image as powerUp Button
     $(".resetGame").click(resetGame);
     $(".playerCharacterSelectionModal img").click(characterClicked);
     $(".gameStart").click(gameStart);
@@ -63,9 +63,16 @@ function columnClicked(){
 
 function powerupButtonClicked(){
     //activates powerUp if currentplayer powerupheld is = true;
-    if(currentPlayer.powerupHeld) {
+    var test = $(this).hasClass(currentPlayer.characterType.characterToken);
+    if(currentPlayer.powerupHeld && test) {
         usePowerup(currentPlayer.characterType.characterPowerup);
         currentPlayer.powerupHeld = false;
+        if(currentPlayerStatus) {
+            $('#player1 img').removeClass('animatePowerupButton');
+        }else{
+            $('#player2 img').removeClass('animatePowerupButton');
+        }
+        updateDOM();
     }
 }
 
@@ -77,12 +84,14 @@ function characterClicked() {
             player1.characterType.characterSound1.play();
             console.log(player1);
             $(this).addClass("hiddenElement");
-            $(".playerCharacterSelectionModal h1").text('Player 2, Choose your character!'); 
+            $("#player1 img").addClass(characterClicked);
+            $(".playerCharacterSelectionModal h1").text('Player 2, Choose your character!');
         } else {   
             player2 = new Player(characterClicked, characters[characterClicked]);
             player2.characterType.characterSound1.play();
             console.log(player2);
             $(this).addClass("hiddenElement");
+            $("#player2 img").addClass(characterClicked);
             $(".playerCharacterSelectionModal h1").text('Let\'s Play!');
             setTimeout(function(){
                 $(".playerCharacterSelectionModal").addClass('hiddenElement');
@@ -97,24 +106,25 @@ function characterClicked() {
 function togglePlayerTurn(){
     //current player has finish his/her turn and currentplayer switches before toggle is called.
     //if player one finish his turn. then toggle switches to player 2 and calls the modal and sets current player.
+
     setTimeout(function(){
-    if(currentPlayerStatus){
+      if(currentPlayerStatus){
         currentPlayer = player1;
         $(".playerTurnModal .playerName").text(currentPlayer.name);
         $('#player1').addClass('highlightCurrentPlayer');
         $('#player2').removeClass('highlightCurrentPlayer');
-    } else {
-        currentPlayer = player2;
-        $(".playerTurnModal .playerName").text(currentPlayer.name);
-        $('#player2').addClass('highlightCurrentPlayer');
-        $('#player1').removeClass('highlightCurrentPlayer');
-    }
-    $(".playerTurnModal").removeClass('hiddenElement');
-    setTimeout(function(){
-        $(".playerTurnModal").addClass('hiddenElement');
-        screenClickable = true;
-        }, 1000);
-    }, 0750);
+      } else {
+          currentPlayer = player2;
+          $(".playerTurnModal .playerName").text(currentPlayer.name);
+          $('#player2').addClass('highlightCurrentPlayer');
+          $('#player1').removeClass('highlightCurrentPlayer');
+      }
+      $(".playerTurnModal").removeClass('hiddenElement');
+      setTimeout(function(){
+          $(".playerTurnModal").addClass('hiddenElement');
+          screenClickable = true;
+          }, 1000);
+      }, 0750);
 }
 
 //########################################## TOKEN PLACEMENT ###################################
@@ -125,8 +135,12 @@ function tokenPlacementCheck( inputPlayer, inputStartCol, inputStartRow ) {
     var playerToken = inputPlayer.characterType.name
     var powerUpResult = powerupPatternCheck( inputPlayer, inputStartCol, inputStartRow);
     if (powerUpResult) {
-    currentPlayer.powerupHeld = true;
-    //activate powerup button
+        currentPlayer.powerupHeld = true;
+        if(currentPlayerStatus) {
+            $('#player1 img').addClass('animatePowerupButton');
+        }else{
+            $('#player2 img').addClass('animatePowerupButton');
+        }
     }
 
     var winResult = winPatternCheck( playerToken, inputStartCol, inputStartRow  );
@@ -164,7 +178,7 @@ function powerupPatternCheck( inputPlayerToken, inputStartCol,inputStartRow ){
     } else if ( (validPosition(inputStartCol + patt[1][0][0],inputStartRow + patt[1][0][1]) === playerToken) && (validPosition(inputStartCol + patt[1][1][0],inputStartRow + patt[1][1][1]) === playerToken) ){
         //2nd check
         foundPowerupPattern = true;
-    } else if ( (validPosition(inputStartCol + patt[2][0][0],inputStartRow + patt[2][0][1]) === playerToken) && (validPosition(inputStartCol + patt[2][0][0],inputStartRow + patt[2][0][1]) === playerToken) ){
+    } else if ( (validPosition(inputStartCol + patt[2][0][0],inputStartRow + patt[2][0][1]) === playerToken) && (validPosition(inputStartCol + patt[2][1][0],inputStartRow + patt[2][1][1]) === playerToken) ){
         //3rd check
         foundPowerupPattern = true;
     }
