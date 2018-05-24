@@ -68,26 +68,25 @@ function characterChoiceClicked(){
 
 // Player Turn Toggle
 function togglePlayerTurn(){
-
+    //current player has finish his/her turn and currentplayer switches before toggle is called.
+    //if player one finish his turn. then toggle switches to player 2 and calls the modal and sets current player.
+    debugger;
     if(currentPlayerStatus){
+        currentPlayer = player1;
         $(".playerTurnModal .playerName").text(currentPlayer.name);
         $('#player1').addClass('highlightCurrentPlayer');
         $('#player2').removeClass('highlightCurrentPlayer');
-        currentPlayer = player1;
     } else {
+        currentPlayer = player2;
         $(".playerTurnModal .playerName").text(currentPlayer.name);
         $('#player2').addClass('highlightCurrentPlayer');
         $('#player1').removeClass('highlightCurrentPlayer');
-        currentPlayer = player2;
     }
     $(".playerTurnModal").removeClass('hiddenElement');
     setTimeout(function(){
         $(".playerTurnModal").addClass('hiddenElement');
         screenClickable = true;
         }, 1000);
-    // Bug fixing, please streamline later
-    currentPlayerStatus = !currentPlayerStatus;
-   
 }
 
 //########################################## TOKEN PLACEMENT ###################################
@@ -105,8 +104,10 @@ function tokenPlacementCheck( inputPlayer, inputStartCol, inputStartRow ) {
     var winResult = winPatternCheck( playerToken, inputStartCol, inputStartRow  );
     if(!winResult){
         screenClickable = false;
+        currentPlayerStatus = !currentPlayerStatus;
         togglePlayerTurn();
-        
+
+
     }
 }
 
