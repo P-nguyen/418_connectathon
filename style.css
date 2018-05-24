@@ -42,10 +42,17 @@ body {
     font-size: 5vmin;
 }
 .footer {
+    position: relative;
     height: 9vmin;
     width: 100%;
     background-color: rgba(15, 10, 58, 0.95);
     color: white;
+}
+.footer:before {
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
 }
 .sideBar {
     display: inline-block;
@@ -64,17 +71,15 @@ body {
     vertical-align: top;
 }
 #gameBoard > div {
-    border: black solid 1px;
+    border: black dashed 1px;
     width: 100%;
     height: 100%; 
 }
 #gameBoard > div > div {
-    /* border: black solid 1px; */
     width: 100%;
     height: 100%; 
 }
 #gameBoard > div > .tokenDropArea {
-    /* background-color: yellow; */
 }
 .column {
     display: inline-grid;
@@ -96,33 +101,25 @@ body {
 
 /* Player Related Classes */
 .playerColumn{
-    vertical-align: middle;
     display: inline-block;
-    width: 32%;
-    height: 100%;
-    
+    margin-left: 3vmin;
+    margin-right: 3vmin;    
 }
 .playerColumn h1{
     display: inline-block;
     vertical-align: middle;
-    margin-top: 2vmin;
-    padding-top: 1vmin;
-    margin-bottom: 0;
-
 }
-.playerImg{
+.characterImg{
     display: inline-block;
-    padding-top: 1vmin;
     height: 7vmin;
-    width: 8vmin;
+    width: 7vmin;
     margin: auto;
-    margin-left: 3vmin;
     vertical-align: middle;
 }
-.highlightCurrentPlayer {
+.highlightCurrentPlayer h1 {
     text-shadow: 0px 0px 7px white;
-    text-decoration: underline;
-    /* background-color: yellow; */
+    border-bottom: white dashed 3px;
+    letter-spacing: .5vmin;
 }
 .playerTurnModal {
     position: fixed;
@@ -175,19 +172,32 @@ body {
     text-align: center;
     vertical-align: middle;
 }
-.playerCharacterSelectionModal img {
+/* .playerCharacterSelectionModal img {
+    position: absolute; 
     display: inline-block;
     top: 50%;
     left: 50%;
-    transform: translate(-50%);
+    transform: translate(-50%, -50%);
+} */
+.character1 {
+    position: absolute; 
+    display: inline-block;
+    top: 50%;
+    left: 12%;
+    transform: translate(-50%, -50%);
+}
+.character2 {
+    position: absolute; 
+    display: inline-block;
+    top: 50%;
+    right: 12%;
+    transform: translate(-50%, -50%);
 }
 
 /* Token State Classes*/
 .player1TokenShowing {
-    background-color: red;
 }
 .player2TokenShowing {
-    background-color: orangered;
 }
 /* Token Falling animation */
 /* Power Up Classes */
@@ -199,7 +209,8 @@ body {
 }
 
 /* Reset Classes */
-.resetButton{
+.resetGame{
+    cursor: pointer;
 }
 
 /* Modal Classes */
