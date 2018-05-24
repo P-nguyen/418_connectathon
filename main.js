@@ -30,6 +30,7 @@ function addClickHandlers(){
     $(".column").click(columnClicked);
     $(".powerupButton").click(powerupButtonClicked);
     $(".resetButton").click(resetButtonClicked);
+    $(".playerCharacterSelectionModal img").click(characterChoiceClicked);
 }
 
 function columnClicked(){
@@ -51,18 +52,20 @@ function resetButtonClicked(){
 }
 
 function characterChoiceClicked(){
+    var characterClicked = $(this).attr("name");
+    console.log(characterClicked);
 }
 
 // Player Turn Toggle
 function togglePlayerTurn(){
-    
+
     if(currentPlayerStatus){
-        $(".playerName").text(player1.name);
+        $(".playerTurnModal .playerName").text(currentPlayer.name);
         $('#player1').addClass('highlightCurrentPlayer');
         $('#player2').removeClass('highlightCurrentPlayer');
         currentPlayer = player1;
     } else {
-        $(".playerName").text(player2.name);
+        $(".playerTurnModal .playerName").text(currentPlayer.name);
         $('#player2').addClass('highlightCurrentPlayer');
         $('#player1').removeClass('highlightCurrentPlayer');
         currentPlayer = player2;
@@ -71,8 +74,9 @@ function togglePlayerTurn(){
     setTimeout(function(){
         $(".playerTurnModal").addClass('hiddenElement')
         }, 1000);
-
+    // Bug fixing, please streamline later
     currentPlayerStatus = !currentPlayerStatus;
+   
 }
 
 //########################################## TOKEN PLACEMENT ###################################
@@ -89,6 +93,7 @@ function tokenPlacementCheck( inputPlayer, inputStartCol, inputStartRow ) {
     var winResult = winPatternCheck( playerToken, inputStartCol, inputStartRow  );
     if(!winResult){
         togglePlayerTurn();
+        
     }
 }
 
@@ -167,6 +172,8 @@ function winPatternCheck( inputPlayerToken, inputStartCol, inputStartRow ){
             if(connect4Counter === winCount){
                 result = true;
                 return console.log("YAY YOU WIN");
+                $(".gameWinModal .playerName").text(currentPlayer.name);
+                $(".gameWinModal .playerName").removeClass('hiddenElement');
             }
             x += dir[i][0];
             y += dir[i][1];
