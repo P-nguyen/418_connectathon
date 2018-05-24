@@ -9,7 +9,8 @@ var currentPlayer = player1;
 var currentPlayerStatus = true;
 var screenClickable = true;
 
-var winCount = 4;
+
+var winCount = 4;//for connect 4 or even higher
 
 var gameBoardArray = [
     ['','','','','',''],
@@ -40,6 +41,7 @@ function columnClicked(){
     }
 
     var columnClicked = $(this).attr("column");
+
     columnClicked = parseInt(columnClicked);
     //drop token and update game board. //if pop up modal for sorry try again.
     var currentRowDroppedIn = dropTokenCol( currentPlayer, columnClicked);
@@ -93,6 +95,7 @@ function tokenPlacementCheck( inputPlayer, inputStartCol, inputStartRow ) {
     var powerUpResult = powerupPatternCheck( inputPlayer, inputStartCol, inputStartRow);
     if (powerUpResult) {
     currentPlayer.powerupHeld = true;
+    //activate powerup button
     }
 
     var winResult = winPatternCheck( playerToken, inputStartCol, inputStartRow  );
@@ -151,7 +154,6 @@ function winPatternCheck( inputPlayerToken, inputStartCol, inputStartRow ){
         [1,1],
         [1,0],
         [1,-1]];
-    debugger;
     for (var i = 0; i < dir.length; i++) { //go clockwise around position and check to see if there is a 'X'
         //check if array at x;y is equal.
         //this resets per loop
