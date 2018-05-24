@@ -291,3 +291,11 @@ function updateDOM(wipe){
 
 }
 
+function resetGame(){
+    //full reset of the game, reset their powerup, and wipe the board clean
+    player1.powerupHeld = false;
+    player2.powerupHeld = false;
+    updateDOM('clean');
+
+}
+
