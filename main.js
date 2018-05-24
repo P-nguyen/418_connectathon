@@ -267,16 +267,16 @@ function updateDOM(wipe){
             //remove IMG class first
             //then add IMG class per gameArray
             var colRow = '[column='+ colIndex +'][row='+ rowIndex +']';
-            $(colRow).removeClass('player1TokenShowing');
-            $(colRow).removeClass('player2TokenShowing'); //removing both player's token
+            $(colRow).removeClass(player1.characterType.characterToken);
+            $(colRow).removeClass(player2.characterType.characterToken); //removing both player's token
             if (wipe === 'clean'){
                 gameBoardArray[colIndex][rowIndex] = '';
             } else {
                 //make sure Luigi is player2!!!!!!!!!!!!!!!!!!!
-                if (gameBoardArray[colIndex][rowIndex] === 'Luigi') {
-                    $(colRow).addClass('player2TokenShowing');
-                } else if (gameBoardArray[colIndex][rowIndex] === 'Mario') {
-                    $(colRow).addClass('player1TokenShowing');
+                if (gameBoardArray[colIndex][rowIndex] === player1.characterType.name) {
+                    $(colRow).addClass(player1.characterType.characterToken);
+                } else if (gameBoardArray[colIndex][rowIndex] === player2.characterType.name) {
+                    $(colRow).addClass(player2.characterType.characterToken);
                 }
 
             }
