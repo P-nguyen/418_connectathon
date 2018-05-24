@@ -38,6 +38,7 @@ body {
 .header h1 {
     margin: 0;
     padding-top: 2vmin;
+    margin-bottom: 0;
     font-size: 5vmin;
 }
 .footer {
@@ -106,6 +107,7 @@ body {
     vertical-align: middle;
     margin-top: 2vmin;
     padding-top: 1vmin;
+    margin-bottom: 0;
 
 }
 .playerImg{
@@ -119,6 +121,7 @@ body {
 }
 .highlightCurrentPlayer {
     text-shadow: 0px 0px 7px white;
+    text-decoration: underline;
     /* background-color: yellow; */
 }
 .playerTurnModal {
@@ -145,10 +148,39 @@ body {
     text-shadow: 4px 4px 5px black;
     text-align: center;
     vertical-align: middle;
-    cursor: pointer;
 }
-
-
+.playerCharacterSelectionModal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: rgba(15, 10, 58, 0.95);
+}
+.playerCharacterSelectionModal h1 {
+    position: absolute; 
+    display: inline-block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    color: white;
+    font-size: 10vmin;
+    text-shadow: 4px 4px 5px black;
+    text-align: center;
+    vertical-align: middle;
+}
+.playerCharacterSelectionModal img {
+    display: inline-block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+}
 
 /* Token State Classes*/
 .player1TokenShowing {
@@ -174,6 +206,39 @@ body {
 .beginGameModal{ 
 }
 .gameWinModal{ 
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: rgba(15, 10, 58, 0.95);
+}
+.gameWinModal h1 {
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    color: white;
+    font-size: 8vmin;
+    text-shadow: 4px 4px 5px black;
+    text-align: center;
+    vertical-align: middle
+}
+.gameWinModal h2 {
+    position: absolute; 
+    top: 75%;
+    left: 50%;
+    margin: auto;
+    color: white;
+    font-size: 6vmin;
+    text-shadow: 4px 4px 5px black;
+    text-align: center;
 }
 .hiddenElement {
     display: none;

@@ -32,6 +32,7 @@ function addClickHandlers(){
     $(".column").click(columnClicked);
     $(".powerupButton").click(powerupButtonClicked);
     $(".resetButton").click(resetButtonClicked);
+    $(".playerCharacterSelectionModal img").click(characterChoiceClicked);
 }
 
 function columnClicked(){
@@ -61,18 +62,20 @@ function resetButtonClicked(){
 }
 
 function characterChoiceClicked(){
+    var characterClicked = $(this).attr("name");
+    console.log(characterClicked);
 }
 
 // Player Turn Toggle
 function togglePlayerTurn(){
-    
+
     if(currentPlayerStatus){
-        $(".playerName").text(player1.name);
+        $(".playerTurnModal .playerName").text(currentPlayer.name);
         $('#player1').addClass('highlightCurrentPlayer');
         $('#player2').removeClass('highlightCurrentPlayer');
         currentPlayer = player1;
     } else {
-        $(".playerName").text(player2.name);
+        $(".playerTurnModal .playerName").text(currentPlayer.name);
         $('#player2').addClass('highlightCurrentPlayer');
         $('#player1').removeClass('highlightCurrentPlayer');
         currentPlayer = player2;
@@ -82,8 +85,9 @@ function togglePlayerTurn(){
         $(".playerTurnModal").addClass('hiddenElement');
         screenClickable = true;
         }, 1000);
-
+    // Bug fixing, please streamline later
     currentPlayerStatus = !currentPlayerStatus;
+   
 }
 
 //########################################## TOKEN PLACEMENT ###################################
@@ -102,6 +106,7 @@ function tokenPlacementCheck( inputPlayer, inputStartCol, inputStartRow ) {
     if(!winResult){
         screenClickable = false;
         togglePlayerTurn();
+        
     }
 }
 
@@ -165,7 +170,8 @@ function winPatternCheck( inputPlayerToken, inputStartCol, inputStartRow ){
         while(fullDirScanCounter !== 2){
             if(connect4Counter === winCount){
                 result = true;
-                console.log("YAY YOU WIN");
+                $(".gameWinModal .playerName").text(currentPlayer.name);
+                $(".gameWinModal").removeClass('hiddenElement');
                 return result;
             }
             x += dir[i][0];
