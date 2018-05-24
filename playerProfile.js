@@ -13,6 +13,7 @@ var characters = {
         // characterWinSound: blank,
         characterToken: 'mario',
         characterIdleImage: 'images/marioIdle.gif',
+        powerupClass: 'fireBallCol',
         powerupPattern: [[[1,1],[2,0]],//[0][0][0],[0][0][1] || [0][1][0],[0][1][1]
                         [[-1,-1],[1,-1]],
                         [[-1,1],[-2,0]]] //v pattern
@@ -25,6 +26,7 @@ var characters = {
         // characterWinSound: blank,
         characterToken: 'luigi',
         characterIdleImage: 'images/marioIdle.gif',
+        powerupClass: 'fireBallRow',
         powerupPattern: [[[0,1],[1,0]],
                         [[0,-1],[1,-1]],
                         [[-1,1],[-1,0]]] //L pattern

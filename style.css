@@ -280,6 +280,18 @@ these class is linked to character object .characterToken*/
     background-image: url("images/TokenPng/LuigiToken.png");
 }
 
+.fireBallCol{
+    position: relative;
+    top:-100vh;
+    background-image: url("images/fireBall.png");
+    animation: dropFireBall 1.5s;
+    transform: scale(5,5);
+}
+
+@keyframes dropFireBall {
+    0%   {top:-20vh;}
+    100% {top:120vh;}
+}
 
 
 /* Media Query Classes */
