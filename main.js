@@ -82,7 +82,7 @@ function tokenPlacementCheck( inputPlayer, inputStartCol, inputStartRow ) {
     //function that will check current dropped token's surrounding.
     //result:
     var playerToken = inputPlayer.characterType.name
-    var powerUpResult = powerupPatternCheckInvertV(playerToken, inputStartCol, inputStartRow);
+    var powerUpResult = powerupPatternCheck( inputPlayer, inputStartCol, inputStartRow);
     if (powerUpResult) {
     currentPlayer.powerupHeld = true;
     }
@@ -104,7 +104,7 @@ if ( ((targetCol < 7) && (targetCol >= 0)) && (((targetCol >= 0)) && (targetRow 
     }
 }
 
-function powerupPatternCheckInvertV( inputPlayerToken, inputStartCol,inputStartRow ){
+function powerupPatternCheck( inputPlayerToken, inputStartCol,inputStartRow ){
     //input parameters: inputPlayerToken(the X or O in the array we are looking for), inputStartCol(the Col position we are searching at), inputStartRow(the Row position we are searching at)
     //output parameters: true(if we found a powerup pattern), false(if we didn't find a powerup pattern)
 
@@ -121,59 +121,26 @@ function powerupPatternCheckInvertV( inputPlayerToken, inputStartCol,inputStartR
     //     invert-v pattern - 3rd check
     //     col +1, row +1
     //     col +2, row +0
+    var patt = inputPlayerToken.characterType.powerupPattern;
+    var playerToken = inputPlayerToken.characterType.name;
+
     var foundPowerupPattern = false;
-    if ( (validPosition(inputStartCol+1,inputStartRow+1) === inputPlayerToken) && (validPosition(inputStartCol+2,inputStartRow) === inputPlayerToken) ){
+    if ( (validPosition(inputStartCol + patt[0][0][0],inputStartRow + patt[0][0][1]) === playerToken) && (validPosition(inputStartCol + patt[0][1][0],inputStartRow + patt[0][1][1]) === playerToken) ){
         //1st check
         foundPowerupPattern = true;
-    } else if ( (validPosition(inputStartCol-1,inputStartRow-1) === inputPlayerToken) && (validPosition(inputStartCol+1,inputStartRow-1) === inputPlayerToken) ){
+    } else if ( (validPosition(inputStartCol + patt[1][0][0],inputStartRow + patt[1][0][1]) === playerToken) && (validPosition(inputStartCol + patt[1][1][0],inputStartRow + patt[1][1][1]) === playerToken) ){
         //2nd check
         foundPowerupPattern = true;
-    } else if ( (validPosition(inputStartCol-1,inputStartRow+1) === inputPlayerToken) && (validPosition(inputStartCol-2,inputStartRow) === inputPlayerToken) ){
+    } else if ( (validPosition(inputStartCol + patt[2][0][0],inputStartRow + patt[2][0][1]) === playerToken) && (validPosition(inputStartCol + patt[2][0][0],inputStartRow + patt[2][0][1]) === playerToken) ){
         //3rd check
         foundPowerupPattern = true;
     }
-    if ( validPosition(inputStartCol,inputStartRow) != inputPlayerToken ){
+    if ( validPosition(inputStartCol,inputStartRow) != playerToken ){
         foundPowerupPattern = false;
         //error checking to see if the selected position is the same as playerToken
         //shouldn't need this since we should always pass in perfect input
     }
 
-    return foundPowerupPattern;
-}
-
-function powerupPatternCheckL( inputPlayerToken,inputStartCol,inputStartRow ){
-    //input parameters: inputPlayerToken(the X or O in the array we are looking for), inputStartCol(the Col position we are searching at), inputStartRow(the Row position we are searching at)
-    //output parameters: true(if we found a powerup pattern), false(if we didn't find a powerup pattern)
-
-    //assuming we are working on gameBoardArray[col][row]
-    //would be nice to light on the board where the powerup match happened
-    //     invert-v pattern - 1st check
-    //     col +0, row +1
-    //     col +1, row +0
-    //
-    //     invert-v pattern - 2nd check
-    //     col +0, row -1
-    //     col +1, row -1
-    //
-    //     invert-v pattern - 3rd check
-    //     col -1, row +1
-    //     col -1, row +0
-    var foundPowerupPattern = false;
-    if ( (validPosition(inputStartCol,inputStartRow+1) === inputPlayerToken) && (validPosition(inputStartCol+1,inputStartRow) === inputPlayerToken) ){
-        //1st check
-        foundPowerupPattern = true;
-    } else if ( (validPosition(inputStartCol,inputStartRow-1) === inputPlayerToken) && (validPosition(inputStartCol+1,inputStartRow-1) === inputPlayerToken) ){
-        //2nd check
-        foundPowerupPattern = true;
-    } else if ( (validPosition(inputStartCol-1,inputStartRow+1) === inputPlayerToken) && (validPosition(inputStartCol-1,inputStartRow) === inputPlayerToken) ){
-        //3rd check
-        foundPowerupPattern = true;
-    }
-    if ( validPosition(inputStartCol,inputStartRow) != inputPlayerToken ){
-        foundPowerupPattern = false;
-        //error checking to see if the selected position is the same as playerToken
-        //shouldn't need this since we should always pass in perfect input
-    }
     return foundPowerupPattern;
 }
 
