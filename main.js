@@ -2,8 +2,8 @@ $(document).ready(loadDocument);
 
 //########################################## GLOBAL VARIABLES ###################################
 // Player Info
-var player1 = new Player("peter", characters.mario);
-var player2 = new Player("steffany", characters.luigi);
+var player1 = null;
+var player2 = null;
 
 var currentPlayer = player1;
 var currentPlayerStatus = true;
@@ -25,14 +25,14 @@ var gameBoardArray = [
 
 function loadDocument(){
     addClickHandlers();
-    togglePlayerTurn();
+    
 }
 
 function addClickHandlers(){
     $(".column").click(columnClicked);
     $(".powerupButton").click(powerupButtonClicked);
-    $(".resetButton").click(resetButtonClicked);
-    $(".playerCharacterSelectionModal img").click(characterChoiceClicked);
+    $(".resetGame").click(resetGame);
+    $(".playerCharacterSelectionModal img").click(characterClicked);
 }
 
 function columnClicked(){
@@ -58,14 +58,29 @@ function powerupButtonClicked(){
     }
 }
 
-function resetButtonClicked(){
+function characterClicked() {
+    debugger;    
+    if($(this).hasClass("characterImg")) {
+        var characterClicked = $(this).attr("name");
+        if(currentPlayerStatus){
+            player1 = new Player(characterClicked, characters[characterClicked]);
+            console.log(player1);
+            $(this).addClass("hiddenElement");
+            $(".playerCharacterSelectionModal h1").text('Player 2, Choose your character!'); 
+        } else {   
+            player2 = new Player(characterClicked, characters[characterClicked]);
+            console.log(player2);
+            $(this).addClass("hiddenElement");
+            $(".playerCharacterSelectionModal h1").text('Let\'s Play!');
+            setTimeout(function(){
+                $(".playerCharacterSelectionModal").addClass('hiddenElement');
+                togglePlayerTurn();
+                }, 4000);
+            
+        }
+        currentPlayerStatus = !currentPlayerStatus;    
+    } 
 }
-
-function characterChoiceClicked(){
-    var characterClicked = $(this).attr("name");
-    console.log(characterClicked);
-}
-
 // Player Turn Toggle
 function togglePlayerTurn(){
     //current player has finish his/her turn and currentplayer switches before toggle is called.
@@ -103,6 +118,7 @@ function tokenPlacementCheck( inputPlayer, inputStartCol, inputStartRow ) {
 
     var winResult = winPatternCheck( playerToken, inputStartCol, inputStartRow  );
     if(!winResult){
+        currentPlayerStatus = !currentPlayerStatus;
         screenClickable = false;
         currentPlayerStatus = !currentPlayerStatus;
         togglePlayerTurn();
@@ -170,6 +186,7 @@ function winPatternCheck( inputPlayerToken, inputStartCol, inputStartRow ){
 
         while(fullDirScanCounter !== 2){
             if(connect4Counter === winCount){
+                // debugger;
                 result = true;
                 $(".gameWinModal .playerName").text(currentPlayer.name);
                 $(".gameWinModal").removeClass('hiddenElement');
