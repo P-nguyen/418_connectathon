@@ -1,9 +1,30 @@
 $(document).ready(loadDocument);
+
+//########################################## GLOBAL VARIABLES ###################################
+// Player Info
+var player1 = new Player("peter", characters.mario);
+var player2 = new Player("steffany", characters.luigi);
+
+var currentPlayer = player1;
+var currentPlayerStatus = true;
+
+var playerToken = 'x'; // to be deleted
+var winCount = 4;
+
+var gameBoardArray = [  ['','','','','',''],
+    ['','','','','',''],
+    ['','','','','',''],
+    ['','','','','',''],
+    ['','','','','',''],
+    ['','','','','',''],
+    ['','','','','','']
+]; //gameBoardArray template
+
+
 function loadDocument(){
     addClickHandlers();
     togglePlayerTurn();
 }
-var currentPlayer = true;
 
 function addClickHandlers(){
     $(".column").click(columnClicked);
@@ -12,9 +33,15 @@ function addClickHandlers(){
 }
 
 function columnClicked(){
+    
     var columnClicked = null;
-        columnClicked = $(this).attr("column");
-        console.log(columnClicked);
+    columnClicked = $(this).attr("column");
+    console.log(columnClicked);
+    columnClicked = parseInt(columnClicked);
+    //drop token and update game board. //if pop up modal for sorry try again.
+    var currentRowDroppedIn = dropTokenCol( currentPlayer, columnClicked);
+    //check to see if powerup is allowed OR if player has won.
+    tokenPlacementCheck( currentPlayer, columnClicked, currentRowDroppedIn );
 }
 
 function powerupButtonClicked(){
@@ -26,65 +53,42 @@ function resetButtonClicked(){
 function characterChoiceClicked(){
 }
 
-// Player Info
-var characters = {
-    mario: {
-        name: 'Mario',
-        characterPowerup: powerupPatternCheckInvertV,
-        // characterSound1: blank, 
-        // characterSound1: blank,
-        // characterWinSound: blank,
-        characterToken: 'images/coin.png', 
-    },
-}
-
-function Player(inputName, inputCharacterType){
-    this.name = inputName;
-    this.characterType = inputCharacterType;
-}
-var player1 = new Player("peter", characters.mario);
-var player2 = new Player("steffany", characters.mario);
 
 // Player Turn Toggle
 function togglePlayerTurn(){
-    if(currentPlayer){
+    
+    if(currentPlayerStatus){
         $(".playerName").text(player1.name);
         $('#player1').addClass('highlightCurrentPlayer');
         $('#player2').removeClass('highlightCurrentPlayer');
+        currentPlayer = player1;
     } else {
         $(".playerName").text(player2.name);
         $('#player2').addClass('highlightCurrentPlayer');
         $('#player1').removeClass('highlightCurrentPlayer');
+        currentPlayer = player2;
     }
     $(".playerTurnModal").removeClass('hiddenElement');
     setTimeout(function(){
         $(".playerTurnModal").addClass('hiddenElement')
         }, 2000);
 
-    currentPlayer = !currentPlayer;
+    currentPlayerStatus = !currentPlayerStatus;
 }
 
-//########################################## GLOBAL VARIABLES ###################################
-var gameBoardArray = [  ['','','','','',''],
-                        ['','','','','',''],
-                        ['','','','','',''],
-                        ['','','','','',''],
-                        ['','','','','',''],
-                        ['','','','','',''],
-                        ['','','','','','']
-]; //gameBoardArray template
+//########################################## TOKEN PLACEMENT ###################################
 
-var playerToken = 'x';
-var winCount = 4;
-
-function tokenPlacementCheck( inputPlayerToken, inputStartCol, inputStartRow ) {
+function tokenPlacementCheck( inputPlayer, inputStartCol, inputStartRow ) {
     //function that will check current dropped token's surrounding.
     //result:
-    var testa = powerupPatternCheckInvertV( inputPlayerToken, inputStartCol, inputStartRow );
-    var testb = winPatternCheck( inputPlayerToken, inputStartCol, inputStartRow  );
-    console.log("powerup: ", testa);
-    console.log("winPatternCheck: ", testb);
-    if(!testb){
+    var playerToken = inputPlayer.characterType.name
+    var powerUpResult = powerupPatternCheckInvertV(playerToken, inputStartCol, inputStartRow);
+    if (powerUpResult) {
+    currentPlayer.powerupHeld = true;
+    }
+
+    var winResult = winPatternCheck( playerToken, inputStartCol, inputStartRow  );
+    if(!winResult){
         togglePlayerTurn();
     }
 }
@@ -100,7 +104,7 @@ if ( ((targetCol < 7) && (targetCol >= 0)) && (((targetCol >= 0)) && (targetRow 
     }
 }
 
-function powerupPatternCheckInvertV( inputPlayerToken,inputStartCol,inputStartRow ){
+function powerupPatternCheckInvertV( inputPlayerToken, inputStartCol,inputStartRow ){
     //input parameters: inputPlayerToken(the X or O in the array we are looking for), inputStartCol(the Col position we are searching at), inputStartRow(the Row position we are searching at)
     //output parameters: true(if we found a powerup pattern), false(if we didn't find a powerup pattern)
 
@@ -178,21 +182,20 @@ function winPatternCheck( inputPlayerToken, inputStartCol, inputStartRow ){
     //outputs: returns true and and false. if current player wins or not.
 
     // this will set direction clockwise = starting at 12:00 || X,Y
+    var result = false;
     var dir = [
         [0,1],
         [1,1],
         [1,0],
         [1,-1]];
-
-    var connect4Counter = 1;
-    var result = false;
-
+    debugger;
     for (var i = 0; i < dir.length; i++) { //go clockwise around position and check to see if there is a 'X'
         //check if array at x;y is equal.
         //this resets per loop
         var x = inputStartCol;
         var y = inputStartRow;
         var fullDirScanCounter = 0;
+        var connect4Counter = 1;
 
         while(fullDirScanCounter !== 2){
             if(connect4Counter === winCount){
@@ -223,19 +226,21 @@ function winPatternCheck( inputPlayerToken, inputStartCol, inputStartRow ){
     return result;
  }
 
-function dropTokenCol(inputPlayerToken, inputColLocation){
+function dropTokenCol(inputPlayer, inputColLocation){
     //dropping from player to location col
     //return: null is full, row position where I placed token again
     //doesn't need to check for out of bounds since the input is from the DOM, should always be valid
     //need to show that the column is full
+    var playerToken = inputPlayer.characterType.name;
     var lastIteminCol = gameBoardArray[inputColLocation].indexOf('');
     if (lastIteminCol > -1){
-        gameBoardArray[inputColLocation][lastIteminCol] = inputPlayerToken;
+        gameBoardArray[inputColLocation][lastIteminCol] = playerToken;
 
         if ( lastIteminCol === gameBoardArray[inputColLocation].length -1){
             //this is the last open space in the column so trigger something
-            }
+        }
 
+        showTokenOnDOM( playerToken, inputColLocation, lastIteminCol );
         return lastIteminCol;
     }else {
         return null
@@ -245,7 +250,12 @@ function dropTokenCol(inputPlayerToken, inputColLocation){
 
 function showTokenOnDOM(inputPlayerTokenImg, inputColLocation, inputRowLocation){
     var col = '[column='+inputColLocation+'][row='+inputRowLocation+']';
-    $(col).addClass('player1TokenShowing');
+
+    if(currentPlayerStatus){ //if currentPlayerStatus = true then player 1
+        $(col).addClass('player1TokenShowing');
+    } else {
+        $(col).addClass('player2TokenShowing');
+    }
 
 }
 
