@@ -19,6 +19,7 @@ body {
     width: 100%;
     margin: 0;
     font-family: 'SuperMario256';
+    position: relative;
 }
 .mainContainer {
     width: 100%;
@@ -320,6 +321,24 @@ these class is linked to character object .characterToken*/
     100% {top:120vh;}
 }
 
+.rowHiddenFireBall{
+    position: absolute;
+    bottom:10vh;
+    left: -20vw;
+    width: 10vh;
+    height: 10vh;
+}
+.fireBallRow{
+    background-image: url("images/fireBall.png");
+    background-size: contain;
+    animation: RowFireBall 1.5s;
+    transform: scale(4,4) rotate(270deg);
+}
+
+@keyframes RowFireBall {
+    0%   {left:-20vw;}
+    100% {left:120vw;}
+}
 
 /* Media Query Classes */
 @media screen and (max-width: 480px) {
