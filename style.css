@@ -118,6 +118,9 @@ body {
     width: 7vmin;
     margin: auto;
     vertical-align: middle;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .highlightCurrentPlayer h1 {
     text-shadow: 0px 0px 7px white;
@@ -197,22 +200,25 @@ body {
     transform: translate(-50%, -50%);
 }
 
-/* Token State Classes*/
-.player1TokenShowing {
-}
-.player2TokenShowing {
-<<<<<<< HEAD
-=======
-    background-color: greenyellow;
->>>>>>> 6359d1bdf626940404c812a86be0f740467e005a
-}
 /* Token Falling animation */
+
 /* Power Up Classes */
 .player1PowerUpBoardHighlight {
 }
 .player2PowerUpBoardHighlight {
 }
-.powerupButton{
+.animatePowerupButton{
+    animation: sway 2.5s infinite;
+    box-shadow: 0px 0px 40px 10px white;
+    border-radius: 100%;
+}
+
+@keyframes sway {
+    0%   {transform: rotate(-25deg) scale(1.25,1.25);}
+    25%   {transform: rotate(0deg) scale(1,1);}
+    50%	 {transform: rotate(25deg) scale(1.25,1.25);}
+    75%	 {transform: rotate(0deg) scale(1,1);}
+    100% {transform: rotate(-25deg) scale(1.25,1.25);}
 }
 
 /* Reset Classes */
