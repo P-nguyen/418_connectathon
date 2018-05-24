@@ -31,7 +31,7 @@ function loadDocument(){
 function addClickHandlers(){
     $(".column").click(columnClicked);
     $(".powerupButton").click(powerupButtonClicked);
-    // $(".resetGame").click(resetGame);
+    $(".resetGame").click(resetGame);
     $(".playerCharacterSelectionModal img").click(characterClicked);
 }
 
@@ -83,7 +83,9 @@ function characterClicked() {
 }
 // Player Turn Toggle
 function togglePlayerTurn(){
-
+    //current player has finish his/her turn and currentplayer switches before toggle is called.
+    //if player one finish his turn. then toggle switches to player 2 and calls the modal and sets current player.
+    debugger;
     if(currentPlayerStatus){
         currentPlayer = player1;
         $(".playerTurnModal .playerName").text(currentPlayer.name);
@@ -100,9 +102,6 @@ function togglePlayerTurn(){
         $(".playerTurnModal").addClass('hiddenElement');
         screenClickable = true;
         }, 1000);
-    // Bug fixing, please streamline later
-    
-   
 }
 
 //########################################## TOKEN PLACEMENT ###################################
@@ -121,8 +120,10 @@ function tokenPlacementCheck( inputPlayer, inputStartCol, inputStartRow ) {
     if(!winResult){
         currentPlayerStatus = !currentPlayerStatus;
         screenClickable = false;
+        currentPlayerStatus = !currentPlayerStatus;
         togglePlayerTurn();
-        
+
+
     }
 }
 
@@ -229,7 +230,7 @@ function dropTokenCol(inputPlayer, inputColLocation){
             //this is the last open space in the column so trigger something
         }
 
-        showTokenOnDOM( playerToken, inputColLocation, lastIteminCol );
+        showTokenOnDOM( inputColLocation, lastIteminCol );
         return lastIteminCol;
     }else {
         return null
@@ -237,14 +238,9 @@ function dropTokenCol(inputPlayer, inputColLocation){
 
 }
 
-function showTokenOnDOM(inputPlayerTokenImg, inputColLocation, inputRowLocation){
+function showTokenOnDOM( inputColLocation, inputRowLocation){
     var col = '[column='+inputColLocation+'][row='+inputRowLocation+']';
-
-    if(currentPlayerStatus){ //if currentPlayerStatus = true then player 1
-        $(col).addClass('player1TokenShowing');
-    } else {
-        $(col).addClass('player2TokenShowing');
-    }
+    $(col).addClass(currentPlayer.characterType.characterToken);
 
 }
 
@@ -304,6 +300,14 @@ function updateDOM(wipe){
         }
 
     }
+
+}
+
+function resetGame(){
+    //full reset of the game, reset their powerup, and wipe the board clean
+    player1.powerupHeld = false;
+    player2.powerupHeld = false;
+    updateDOM('clean');
 
 }
 
