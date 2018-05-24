@@ -53,7 +53,6 @@ function resetButtonClicked(){
 function characterChoiceClicked(){
 }
 
-
 // Player Turn Toggle
 function togglePlayerTurn(){
     
@@ -71,7 +70,7 @@ function togglePlayerTurn(){
     $(".playerTurnModal").removeClass('hiddenElement');
     setTimeout(function(){
         $(".playerTurnModal").addClass('hiddenElement')
-        }, 2000);
+        }, 1000);
 
     currentPlayerStatus = !currentPlayerStatus;
 }
