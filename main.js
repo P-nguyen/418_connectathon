@@ -10,6 +10,7 @@ var currentPlayerStatus = true; // true is player 1 and false is player 2
 var screenClickable = true;
 
 
+
 var winCount = 4;//for connect 4 or even higher
 
 var gameBoardArray = [
@@ -33,11 +34,18 @@ function addClickHandlers(){
     $(".playerColumn img").click(powerupButtonClicked); // sets image as powerUp Button
     $(".resetGame").click(resetGame);
     $(".playerCharacterSelectionModal img").click(characterClicked);
+    $(".gameStart").click(gameStart);
 }
 
-function columnClicked(){
+function gameStart() {
+    $(".gameStart").addClass('hiddenElement'); 
+    $(".playerCharacterSelectionModal").removeClass('hiddenElement');
+    bgMusicPlay();
+}
 
-    if(!screenClickable){//if screenClicable = true then you can click.
+
+function columnClicked(){
+    if(!screenClickable){//if screenClickable = true then you can click.
         return;
     }
 
@@ -73,12 +81,14 @@ function characterClicked() {
         var characterClicked = $(this).attr("name");
         if(currentPlayerStatus){
             player1 = new Player(characterClicked, characters[characterClicked]);
+            player1.characterType.characterSound1.play();
             console.log(player1);
             $(this).addClass("hiddenElement");
             $("#player1 img").addClass(characterClicked);
             $(".playerCharacterSelectionModal h1").text('Player 2, Choose your character!');
         } else {   
             player2 = new Player(characterClicked, characters[characterClicked]);
+            player2.characterType.characterSound1.play();
             console.log(player2);
             $(this).addClass("hiddenElement");
             $("#player2 img").addClass(characterClicked);
@@ -96,22 +106,25 @@ function characterClicked() {
 function togglePlayerTurn(){
     //current player has finish his/her turn and currentplayer switches before toggle is called.
     //if player one finish his turn. then toggle switches to player 2 and calls the modal and sets current player.
-    if(currentPlayerStatus){
+
+    setTimeout(function(){
+      if(currentPlayerStatus){
         currentPlayer = player1;
         $(".playerTurnModal .playerName").text(currentPlayer.name);
         $('#player1').addClass('highlightCurrentPlayer');
         $('#player2').removeClass('highlightCurrentPlayer');
-    } else {
-        currentPlayer = player2;
-        $(".playerTurnModal .playerName").text(currentPlayer.name);
-        $('#player2').addClass('highlightCurrentPlayer');
-        $('#player1').removeClass('highlightCurrentPlayer');
-    }
-    $(".playerTurnModal").removeClass('hiddenElement');
-    setTimeout(function(){
-        $(".playerTurnModal").addClass('hiddenElement');
-        screenClickable = true;
-        }, 1000);
+      } else {
+          currentPlayer = player2;
+          $(".playerTurnModal .playerName").text(currentPlayer.name);
+          $('#player2').addClass('highlightCurrentPlayer');
+          $('#player1').removeClass('highlightCurrentPlayer');
+      }
+      $(".playerTurnModal").removeClass('hiddenElement');
+      setTimeout(function(){
+          $(".playerTurnModal").addClass('hiddenElement');
+          screenClickable = true;
+          }, 1000);
+      }, 0750);
 }
 
 //########################################## TOKEN PLACEMENT ###################################
@@ -174,7 +187,6 @@ function powerupPatternCheck( inputPlayerToken, inputStartCol,inputStartRow ){
         //error checking to see if the selected position is the same as playerToken
         //shouldn't need this since we should always pass in perfect input
     }
-
     return foundPowerupPattern;
 }
 
@@ -252,6 +264,7 @@ function dropTokenCol(inputPlayer, inputColLocation){
 }
 
 function showTokenOnDOM( inputColLocation, inputRowLocation){
+    coinDrop.play();
     var col = '[column='+inputColLocation+'][row='+inputRowLocation+']';
     $(col).addClass(currentPlayer.characterType.characterToken);
 
@@ -323,4 +336,14 @@ function resetGame(){
     updateDOM('clean');
 
 }
-
+// Sounds
+var bgMusic = new Audio('audio/MarioBros.mp3');   
+var coinDrop = new Audio('audio/coin.wav'); 
+var powerUp = new Audio('audio/powerUp.mp3'); 
+function bgMusicPlay(){
+    bgMusic.play();
+    bgMusic.loop=true;
+}
+function bgMusicPause(){
+  bgMusic.pause();
+}
