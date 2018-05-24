@@ -66,11 +66,13 @@ function characterClicked() {
             player1 = new Player(characterClicked, characters[characterClicked]);
             console.log(player1);
             $(this).addClass("hiddenElement");
-            $(".playerCharacterSelectionModal h1").text('Player 2, Choose your character!'); 
+            $("#player1 img").addClass(characterClicked);
+            $(".playerCharacterSelectionModal h1").text('Player 2, Choose your character!');
         } else {   
             player2 = new Player(characterClicked, characters[characterClicked]);
             console.log(player2);
             $(this).addClass("hiddenElement");
+            $("#player2 img").addClass(characterClicked);
             $(".playerCharacterSelectionModal h1").text('Let\'s Play!');
             setTimeout(function(){
                 $(".playerCharacterSelectionModal").addClass('hiddenElement');
