@@ -60,7 +60,7 @@ body {
     margin: auto;
     grid-template-columns: repeat(7, 1fr);
     /* background-color: rgba(15, 10, 58, 0.35); */
-    grid-column-gap: 1vw;
+    grid-column-gap: 1vmin;
     vertical-align: top;
 }
 #gameBoard > div {
@@ -187,7 +187,7 @@ body {
     background-color: red;
 }
 .player2TokenShowing {
-    background-color: orangered;
+    background-color: greenyellow;
 }
 /* Token Falling animation */
 /* Power Up Classes */
