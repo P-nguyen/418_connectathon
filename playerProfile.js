@@ -8,7 +8,7 @@ var characters = {
     mario: {
         name: 'Mario',
         characterPowerup: 'delCol',//powerupPatternCheckInvertV,
-        // characterSound1: blank,
+        characterSound1: new Audio('audio/mario.mp3'),
         // characterSound1: blank,
         // characterWinSound: blank,
         characterToken: 'mario',
@@ -20,7 +20,7 @@ var characters = {
     luigi: {
         name: 'Luigi',
         characterPowerup: 'delRow',//powerupPatternCheckInvertV,
-        // characterSound1: blank,
+        characterSound1: new Audio('audio/luigi.mp3'),
         // characterSound1: blank,
         // characterWinSound: blank,
         characterToken: 'luigi',

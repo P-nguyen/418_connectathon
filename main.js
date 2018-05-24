@@ -10,6 +10,7 @@ var currentPlayerStatus = true;
 var screenClickable = true;
 
 
+
 var winCount = 4;//for connect 4 or even higher
 
 var gameBoardArray = [
@@ -33,11 +34,18 @@ function addClickHandlers(){
     $(".powerupButton").click(powerupButtonClicked);
     $(".resetGame").click(resetGame);
     $(".playerCharacterSelectionModal img").click(characterClicked);
+    $(".gameStart").click(gameStart);
 }
 
-function columnClicked(){
+function gameStart() {
+    $(".gameStart").addClass('hiddenElement'); 
+    $(".playerCharacterSelectionModal").removeClass('hiddenElement');
+    bgMusicPlay();
+}
 
-    if(!screenClickable){//if screenClicable = true then you can click.
+
+function columnClicked(){
+    if(!screenClickable){//if screenClickable = true then you can click.
         return;
     }
 
@@ -62,16 +70,17 @@ function powerupButtonClicked(){
 }
 
 function characterClicked() {
-    debugger;    
     if($(this).hasClass("characterImg")) {
         var characterClicked = $(this).attr("name");
         if(currentPlayerStatus){
             player1 = new Player(characterClicked, characters[characterClicked]);
+            player1.characterType.characterSound1.play();
             console.log(player1);
             $(this).addClass("hiddenElement");
             $(".playerCharacterSelectionModal h1").text('Player 2, Choose your character!'); 
         } else {   
             player2 = new Player(characterClicked, characters[characterClicked]);
+            player2.characterType.characterSound1.play();
             console.log(player2);
             $(this).addClass("hiddenElement");
             $(".playerCharacterSelectionModal h1").text('Let\'s Play!');
@@ -163,7 +172,6 @@ function powerupPatternCheck( inputPlayerToken, inputStartCol,inputStartRow ){
         //error checking to see if the selected position is the same as playerToken
         //shouldn't need this since we should always pass in perfect input
     }
-
     return foundPowerupPattern;
 }
 
@@ -241,6 +249,7 @@ function dropTokenCol(inputPlayer, inputColLocation){
 }
 
 function showTokenOnDOM( inputColLocation, inputRowLocation){
+    coinDrop.play();
     var col = '[column='+inputColLocation+'][row='+inputRowLocation+']';
     $(col).addClass(currentPlayer.characterType.characterToken);
 
@@ -312,4 +321,13 @@ function resetGame(){
     updateDOM('clean');
 
 }
-
+// Sounds
+var bgMusic = new Audio('audio/MarioBros.mp3');   
+var coinDrop = new Audio('audio/coin.wav'); 
+function bgMusicPlay(){
+    bgMusic.play();
+    bgMusic.loop=true;
+}
+function bgMusicPause(){
+  bgMusic.pause();
+}
