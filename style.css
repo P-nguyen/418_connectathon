@@ -1,9 +1,24 @@
 /* Placeholder for fontface */
-
+@font-face {
+    font-family: 'SuperMario256';
+    src: url('fonts/SuperMario256.eot'),
+        url('fonts/SuperMario256.woff2') format('woff2'),
+        url('fonts/SuperMario256.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'SuperMarioGalaxy';
+    src: url('fonts/SuperMarioGalaxy.woff') format('woff'),
+         url('fonts/SuperMarioGalaxy.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
 /* Main Layout Styling Classes */
 body {
     width: 100%;
     margin: 0;
+    font-family: 'SuperMario256';
 }
 .mainContainer {
     width: 100%;
@@ -15,107 +30,122 @@ body {
     background-position-y: bottom;
 }
 .header {
-    height: 10%;
+    height: 9vmin;
     width: 100%;
-    background-color: blue;
+    background-color: rgba(15, 10, 58, 0.65);
+    color: white;
+}
+.header h1 {
+    margin: 0;
+    padding-top: 2vmin;
+    font-size: 5vmin;
 }
 .footer {
-    height: 10%;
+    height: 9vmin;
     width: 100%;
-    background-color: blue;
+    background-color: rgba(15, 10, 58, 0.95);
+    color: white;
 }
 .sideBar {
     display: inline-block;
-    background-color: purple;
-    width: 9%;
-    /* height: 100vh; */
+    height: 81vmin;
+    width: 8%;
     margin: auto;
 }
 #gameBoard {
     display: inline-grid;
-    background-color: green;
-    height: 78%;
+    height: 82vmin;
     width: 81%;
     margin: auto;
     grid-template-columns: repeat(7, 1fr);
-
+    /* background-color: rgba(15, 10, 58, 0.35); */
+    grid-column-gap: 1vw;
+    vertical-align: top;
 }
-#gameBoard > div > div {
+#gameBoard > div {
     border: black solid 1px;
     width: 100%;
     height: 100%; 
 }
-#gameBoard > div > .tokenDropArea {
-    background-color: yellow;
+#gameBoard > div > div {
+    /* border: black solid 1px; */
+    width: 100%;
+    height: 100%; 
 }
-.column0 {
+#gameBoard > div > .tokenDropArea {
+    /* background-color: yellow; */
+}
+.column {
     display: inline-grid;
-    background-color: green;
+    background-image: url(images/pipe.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
     grid-template-rows: repeat(7, 1fr); 
     width: 100%;
-    height: 100%;  
+    height: 70vmin;  
 }
-.column1 {
-    display: inline-grid;
-    background-color: green;
-    grid-template-rows: repeat(7, 1fr);  
+.column:hover {
+    box-shadow: 0px 0px 40px 10px white;
 }
-.column2 {
-    display: inline-grid;
-    background-color: green;
-    grid-template-rows: repeat(7, 1fr);  
+.column div img {
+    max-height: 100%;
+    max-width: 100%;
 }
-.column3 {
-    display: inline-grid;
-    background-color: green;
-    grid-template-rows: repeat(7, 1fr);  
-}
-.column4 {
-    display: inline-grid;
-    background-color: green;
-    grid-template-rows: repeat(7, 1fr);  
-}
-.column5 {
-    display: inline-grid;
-    background-color: green;
-    grid-template-rows: repeat(7, 1fr);  
-}
-.column6 {
-    display: inline-grid;
-    background-color: green;
-    grid-template-rows: repeat(7, 1fr);  
-}
-
-.emptyLocation {
-    /* Use for 'blank space' view */
-}
-.columnHighlight {
-    background-color: blueviolet;
-}
-
 
 /* Player Related Classes */
 .playerColumn{
-    vertical-align: top;
+    vertical-align: middle;
     display: inline-block;
-    width: 33%;
-    height: 100px;
+    width: 32%;
+    height: 100%;
+    
 }
-.playerColumn h2{
-    margin-top: 10px;
-    margin-bottom: 10px;
+.playerColumn h1{
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 2vmin;
+    padding-top: 1vmin;
+
 }
 .playerImg{
-    height: 50px;
-    width: 50px;
+    display: inline-block;
+    padding-top: 1vmin;
+    height: 7vmin;
+    width: 8vmin;
     margin: auto;
-    background-color: hotpink;
+    margin-left: 3vmin;
+    vertical-align: middle;
 }
-
 .highlightCurrentPlayer {
-    background-color: yellow;
+    text-shadow: 0px 0px 7px white;
+    /* background-color: yellow; */
 }
 .playerTurnModal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: rgba(15, 10, 58, 0.95);
+}
+.playerTurnModal h1 {
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    color: white;
+    font-size: 10vmin;
+    text-shadow: 4px 4px 5px black;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
 }
 
 

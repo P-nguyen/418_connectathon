@@ -34,7 +34,8 @@ var characters = {
         // characterSound1: blank, 
         // characterSound1: blank,
         // characterWinSound: blank,
-        characterToken: 'images/coin.png', 
+        characterToken: 'images/coin.png',
+        characterIdleImage: 'images/marioIdle.gif' 
     },
 }
 
@@ -59,7 +60,7 @@ function togglePlayerTurn(){
     $(".playerTurnModal").removeClass('hiddenElement');
     setTimeout(function(){
         $(".playerTurnModal").addClass('hiddenElement')
-        }, 2000);
+        }, 1000);
 
     currentPlayer = !currentPlayer;
 }
