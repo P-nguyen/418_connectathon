@@ -219,5 +219,30 @@ function showTokenOnDOM(inputPlayerTokenImg, inputColLocation, inputRowLocation)
 
 }
 
+function usePowerup(powerUpName){
+//using powerUp: delCol deletes a random entire column
+//delRow deletes the entire bottom row
+    switch (powerUpName){
+        case 'delCol' :
+            var randomNum7;
+            var columnsInGame = gameBoardArray.length;
+            randomNum7 = Math.floor((Math.random())*(gameBoardArray.length));
+            gameBoardArray[randomNum7].splice(0); //removes entire column contents
+            for (var indexRow = 0; indexRow < 6;indexRow++){
+                gameBoardArray[randomNum7].push(''); //put back empty ''
+            }
+            console.log('got rid of col: ' + randomNum7);
+            break;
+        case 'delRow' :
+            for (var indexCol = 0; indexCol < 7;indexCol++){
+                gameBoardArray[indexCol].splice(0,1);
+                gameBoardArray[indexCol].push('');
+            }
+            break;
+
+    }
+
+}
+
 //tokenPlacementCheck(playerToken,2,2);
 
