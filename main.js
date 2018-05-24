@@ -97,7 +97,7 @@ function characterClicked() {
 function togglePlayerTurn(){
     //current player has finish his/her turn and currentplayer switches before toggle is called.
     //if player one finish his turn. then toggle switches to player 2 and calls the modal and sets current player.
-    debugger;
+    setTimeout(function(){
     if(currentPlayerStatus){
         currentPlayer = player1;
         $(".playerTurnModal .playerName").text(currentPlayer.name);
@@ -114,6 +114,7 @@ function togglePlayerTurn(){
         $(".playerTurnModal").addClass('hiddenElement');
         screenClickable = true;
         }, 1000);
+    }, 0750);
 }
 
 //########################################## TOKEN PLACEMENT ###################################
@@ -324,6 +325,7 @@ function resetGame(){
 // Sounds
 var bgMusic = new Audio('audio/MarioBros.mp3');   
 var coinDrop = new Audio('audio/coin.wav'); 
+var powerUp = new Audio('audio/powerUp.mp3'); 
 function bgMusicPlay(){
     bgMusic.play();
     bgMusic.loop=true;
