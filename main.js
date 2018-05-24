@@ -7,11 +7,12 @@ var player2 = new Player("steffany", characters.luigi);
 
 var currentPlayer = player1;
 var currentPlayerStatus = true;
+var screenClickable = true;
 
-var playerToken = 'x'; // to be deleted
 var winCount = 4;
 
-var gameBoardArray = [  ['','','','','',''],
+var gameBoardArray = [
+    ['','','','','',''],
     ['','','','','',''],
     ['','','','','',''],
     ['','','','','',''],
@@ -33,10 +34,12 @@ function addClickHandlers(){
 }
 
 function columnClicked(){
-    
-    var columnClicked = null;
-    columnClicked = $(this).attr("column");
-    console.log(columnClicked);
+
+    if(!screenClickable){//if screenClicable = true then you can click.
+        return;
+    }
+
+    var columnClicked = $(this).attr("column");
     columnClicked = parseInt(columnClicked);
     //drop token and update game board. //if pop up modal for sorry try again.
     var currentRowDroppedIn = dropTokenCol( currentPlayer, columnClicked);
@@ -45,6 +48,11 @@ function columnClicked(){
 }
 
 function powerupButtonClicked(){
+    //activates powerUp if currentplayer powerupheld is = true;
+    if(currentPlayer.powerupHeld) {
+        usePowerup(currentPlayer.characterType.characterPowerup);
+        currentPlayer.powerupHeld = false;
+    }
 }
 
 function resetButtonClicked(){
@@ -69,7 +77,8 @@ function togglePlayerTurn(){
     }
     $(".playerTurnModal").removeClass('hiddenElement');
     setTimeout(function(){
-        $(".playerTurnModal").addClass('hiddenElement')
+        $(".playerTurnModal").addClass('hiddenElement');
+        screenClickable = true;
         }, 1000);
 
     currentPlayerStatus = !currentPlayerStatus;
@@ -88,38 +97,26 @@ function tokenPlacementCheck( inputPlayer, inputStartCol, inputStartRow ) {
 
     var winResult = winPatternCheck( playerToken, inputStartCol, inputStartRow  );
     if(!winResult){
+        screenClickable = false;
         togglePlayerTurn();
     }
 }
 
 function validPosition(targetCol,targetRow){
-// parameters: targetCol, targetRow
-// return: value at position of gameBoardArray, or if outside then return null
+    // parameters: targetCol, targetRow
+    // return: value at position of gameBoardArray, or if outside then return null
 
-if ( ((targetCol < 7) && (targetCol >= 0)) && (((targetCol >= 0)) && (targetRow < 6))){
-    return gameBoardArray[targetCol][targetRow];
-} else {
-        return null;
-    }
+    if ( ((targetCol < 7) && (targetCol >= 0)) && (((targetCol >= 0)) && (targetRow < 6))){
+        return gameBoardArray[targetCol][targetRow];
+    } else {
+            return null;
+        }
 }
 
 function powerupPatternCheck( inputPlayerToken, inputStartCol,inputStartRow ){
     //input parameters: inputPlayerToken(the X or O in the array we are looking for), inputStartCol(the Col position we are searching at), inputStartRow(the Row position we are searching at)
     //output parameters: true(if we found a powerup pattern), false(if we didn't find a powerup pattern)
 
-    //assuming we are working on gameBoardArray[col][row]
-    //would be nice to light on the board where the powerup match happened
-    //     invert-v pattern - 1st check
-    //     col +1, row +1
-    //     col +2, row +0
-    //
-    //     invert-v pattern - 2nd check
-    //     col -1, row -1
-    //     col +1, row -1
-    //
-    //     invert-v pattern - 3rd check
-    //     col +1, row +1
-    //     col +2, row +0
     var patt = inputPlayerToken.characterType.powerupPattern;
     var playerToken = inputPlayerToken.characterType.name;
 
@@ -166,7 +163,8 @@ function winPatternCheck( inputPlayerToken, inputStartCol, inputStartRow ){
         while(fullDirScanCounter !== 2){
             if(connect4Counter === winCount){
                 result = true;
-                return console.log("YAY YOU WIN");
+                console.log("YAY YOU WIN");
+                return result;
             }
             x += dir[i][0];
             y += dir[i][1];
@@ -190,7 +188,7 @@ function winPatternCheck( inputPlayerToken, inputStartCol, inputStartRow ){
         }
     }
     return result;
- }
+}
 
 function dropTokenCol(inputPlayer, inputColLocation){
     //dropping from player to location col
@@ -225,10 +223,10 @@ function showTokenOnDOM(inputPlayerTokenImg, inputColLocation, inputRowLocation)
 
 }
 
-function usePowerup(powerUpName){
+function usePowerup(inputPowerUpName){
 //using powerUp: delCol deletes a random entire column
 //delRow deletes the entire bottom row
-    switch (powerUpName){
+    switch (inputPowerUpName){
         case 'delCol' :
             var randomNum7;
             var columnsInGame = gameBoardArray.length;
@@ -249,6 +247,4 @@ function usePowerup(powerUpName){
     }
 
 }
-
-//tokenPlacementCheck(playerToken,2,2);
 
