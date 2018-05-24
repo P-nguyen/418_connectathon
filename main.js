@@ -299,8 +299,9 @@ function usePowerup(inputPowerUpName){
                 gameBoardArray[indexCol].splice(0,1);
                 gameBoardArray[indexCol].push('');
             }
+            $('.rowHiddenFireBall').addClass('fireBallRow');
+            setTimeout(function(){$('.rowHiddenFireBall').removeClass('fireBallRow')},1500);
             break;
-
     }
 
 }
