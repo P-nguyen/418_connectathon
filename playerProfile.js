@@ -7,7 +7,7 @@ function Player(inputName, inputCharacterType){
 var characters = {
     mario: {
         name: 'Mario',
-        characterPowerup: 'Smash',//powerupPatternCheckInvertV,
+        characterPowerup: 'delCol',//powerupPatternCheckInvertV,
         // characterSound1: blank,
         // characterSound1: blank,
         // characterWinSound: blank,
@@ -19,7 +19,7 @@ var characters = {
     },
     luigi: {
         name: 'Luigi',
-        characterPowerup: 'jump',//powerupPatternCheckInvertV,
+        characterPowerup: 'delRow',//powerupPatternCheckInvertV,
         // characterSound1: blank,
         // characterSound1: blank,
         // characterWinSound: blank,
