@@ -225,10 +225,12 @@ function showTokenOnDOM(inputPlayerTokenImg, inputColLocation, inputRowLocation)
 
 }
 
+
 function usePowerup(inputPowerUpName){
 //using powerUp: delCol deletes a random entire column
 //delRow deletes the entire bottom row
     switch (inputPowerUpName){
+
         case 'delCol' :
             var randomNum7;
             var columnsInGame = gameBoardArray.length;
@@ -245,6 +247,38 @@ function usePowerup(inputPowerUpName){
                 gameBoardArray[indexCol].push('');
             }
             break;
+
+    }
+
+}
+
+function updateDOM(wipe){
+    //updates DOM to reflect what is on the array
+    //parameter wipe:'clean' to wipe clean entire array
+    //no parameter then only update the DOM according to the array
+    var oolLength = gameBoardArray.length;
+    var rowLength = gameBoardArray[0].length;
+
+    for (var colIndex = 0; colIndex < oolLength; colIndex++){
+
+        for (var rowIndex = 0; rowIndex < rowLength; rowIndex++){
+            //remove IMG class first
+            //then add IMG class per gameArray
+            var colRow = '[column='+ colIndex +'][row='+ rowIndex +']';
+            $(colRow).removeClass('player1TokenShowing');
+            $(colRow).removeClass('player2TokenShowing'); //removing both player's token
+            if (wipe === 'clean'){
+                gameBoardArray[colIndex][rowIndex] = '';
+            } else {
+                //make sure Luigi is player2!!!!!!!!!!!!!!!!!!!
+                if (gameBoardArray[colIndex][rowIndex] === 'Luigi') {
+                    $(colRow).addClass('player2TokenShowing');
+                } else if (gameBoardArray[colIndex][rowIndex] === 'Mario') {
+                    $(colRow).addClass('player1TokenShowing');
+                }
+
+            }
+        }
 
     }
 
