@@ -12,7 +12,7 @@ var characters = {
         // characterSound1: blank,
         // characterWinSound: blank,
         characterToken: 'images/coin.png',
-        powerupPattern: [[[1,1],[2,0]],//[0][0][0],[0][0][1]
+        powerupPattern: [[[1,1],[2,0]],//[0][0][0],[0][0][1] || [0][1][0],[0][1][1]
                         [[-1,-1],[1,-1]],
                         [[-1,1],[-2,0]]] //v pattern
     },
