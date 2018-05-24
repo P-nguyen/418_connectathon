@@ -75,7 +75,7 @@ function characterClicked() {
             setTimeout(function(){
                 $(".playerCharacterSelectionModal").addClass('hiddenElement');
                 togglePlayerTurn();
-                }, 4000);
+                }, 2500);
             
         }
         currentPlayerStatus = !currentPlayerStatus;    
@@ -120,7 +120,6 @@ function tokenPlacementCheck( inputPlayer, inputStartCol, inputStartRow ) {
     if(!winResult){
         currentPlayerStatus = !currentPlayerStatus;
         screenClickable = false;
-        currentPlayerStatus = !currentPlayerStatus;
         togglePlayerTurn();
 
 
