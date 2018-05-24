@@ -46,6 +46,9 @@ function columnClicked(){
     columnClicked = parseInt(columnClicked);
     //drop token and update game board. //if pop up modal for sorry try again.
     var currentRowDroppedIn = dropTokenCol( currentPlayer, columnClicked);
+    if (currentRowDroppedIn === null){
+        return;
+    }
     //check to see if powerup is allowed OR if player has won.
     tokenPlacementCheck( currentPlayer, columnClicked, currentRowDroppedIn );
 }
