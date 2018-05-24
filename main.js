@@ -66,6 +66,11 @@ function powerupButtonClicked(){
     var test = $(this).hasClass(currentPlayer.characterType.characterToken);
     if(currentPlayer.powerupHeld && test) {
         usePowerup(currentPlayer.characterType.characterPowerup);
+        //call class of specific character.
+
+        //settimeout to remove class
+
+
         currentPlayer.powerupHeld = false;
         if(currentPlayerStatus) {
             $('#player1 img').removeClass('animatePowerupButton');
@@ -285,6 +290,9 @@ function usePowerup(inputPowerUpName){
                 gameBoardArray[randomNum7].push(''); //put back empty ''
             }
             console.log('got rid of col: ' + randomNum7);
+            var elementCall = '.tokenDropArea[column='+randomNum7+']';
+            $(elementCall).addClass('fireBallCol');
+            setTimeout(function(){$(elementCall).removeClass('fireBallCol')},1500);
             break;
         case 'delRow' :
             for (var indexCol = 0; indexCol < 7;indexCol++){
