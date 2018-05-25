@@ -131,7 +131,7 @@ function togglePlayerTurn(){
           $(".playerTurnModal").addClass('hiddenElement');
           screenClickable = true;
           }, 1000);
-      }, 0750);
+      }, 750);
 }
 
 //########################################## TOKEN PLACEMENT ###################################
@@ -139,7 +139,7 @@ function togglePlayerTurn(){
 function tokenPlacementCheck( inputPlayer, inputStartCol, inputStartRow ) {
     //function that will check current dropped token's surrounding.
     //result:
-    var playerToken = inputPlayer.characterType.name
+    var playerToken = inputPlayer.characterType.name;
     var powerUpResult = powerupPatternCheck( inputPlayer, inputStartCol, inputStartRow);
     if (powerUpResult) {
         currentPlayer.powerupHeld = true;
@@ -344,7 +344,9 @@ function updateDOM(wipe){
 function resetGame(){
     //full reset of the game, reset their powerup, and wipe the board clean
     player1.powerupHeld = false;
+    $('#player1 img').removeClass('animatePowerupButton');
     player2.powerupHeld = false;
+    $('#player2 img').removeClass('animatePowerupButton');
     resetSound.play();
     cancelHurryUp();
     bgMusic.pause();
