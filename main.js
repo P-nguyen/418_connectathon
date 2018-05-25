@@ -66,11 +66,7 @@ function powerupButtonClicked(){
     var test = $(this).hasClass(currentPlayer.characterType.characterToken);
     if(currentPlayer.powerupHeld && test) {
         usePowerup(currentPlayer.characterType.characterPowerup);
-        //call class of specific character.
-
-        //settimeout to remove class
-
-
+    
         currentPlayer.powerupHeld = false;
         if(currentPlayerStatus) {
             $('#player1 img').removeClass('animatePowerupButton');
@@ -87,14 +83,12 @@ function characterClicked() {
         if(currentPlayerStatus){
             player1 = new Player(characterClicked, characters[characterClicked]);
             player1.characterType.characterSound1.play();
-            console.log(player1);
             $(this).addClass("hiddenElement");
             $("#player1 img").addClass(characterClicked);
             $(".playerCharacterSelectionModal h1").text('Player 2, Choose your character!');
         } else {   
             player2 = new Player(characterClicked, characters[characterClicked]);
             player2.characterType.characterSound1.play();
-            console.log(player2);
             $(this).addClass("hiddenElement");
             $("#player2 img").addClass(characterClicked);
             $(".playerCharacterSelectionModal h1").text('Let\'s Play!');
@@ -143,6 +137,7 @@ function tokenPlacementCheck( inputPlayer, inputStartCol, inputStartRow ) {
     var powerUpResult = powerupPatternCheck( inputPlayer, inputStartCol, inputStartRow);
     if (powerUpResult) {
         currentPlayer.powerupHeld = true;
+        powerUp.play();
         if(currentPlayerStatus) {
             $('#player1 img').addClass('animatePowerupButton');
         }else{
@@ -218,7 +213,6 @@ function winPatternCheck( inputPlayerToken, inputStartCol, inputStartRow ){
 
         while(fullDirScanCounter !== 2){
             if(connect4Counter === winCount){
-                // debugger;
                 result = true;
                 $(".gameWinModal .playerName").text(currentPlayer.name);
                 $(".gameWinModal").removeClass('hiddenElement');
@@ -292,7 +286,6 @@ function usePowerup(inputPowerUpName){
                 gameBoardArray[randomNum7].push(''); //put back empty ''
             }
             fireballSound.play();
-            console.log('got rid of col: ' + randomNum7);
             var elementCall = '.tokenDropArea[column='+randomNum7+']';
             $(elementCall).addClass('fireBallCol');
             setTimeout(function(){$(elementCall).removeClass('fireBallCol')},1500);
@@ -302,6 +295,7 @@ function usePowerup(inputPowerUpName){
                 gameBoardArray[indexCol].splice(0,1);
                 gameBoardArray[indexCol].push('');
             }
+            fireballSound.play();
             $('.rowHiddenFireBall').addClass('fireBallRow');
             setTimeout(function(){$('.rowHiddenFireBall').removeClass('fireBallRow')},1500);
             break;
@@ -350,6 +344,7 @@ function resetGame(){
     resetSound.play();
     cancelHurryUp();
     bgMusic.pause();
+    $(".gameWinModal").addClass('hiddenElement');
     updateDOM('clean');
 
 }
