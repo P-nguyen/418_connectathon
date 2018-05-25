@@ -82,7 +82,7 @@ function powerupButtonClicked(){
 }
 
 function characterClicked() {
-    if($(this).hasClass("characterImg")) {
+    if($(this).hasClass("character")) {
         var characterClicked = $(this).attr("name");
         if(currentPlayerStatus){
             player1 = new Player(characterClicked, characters[characterClicked]);
@@ -101,7 +101,7 @@ function characterClicked() {
             setTimeout(function(){
                 $(".playerCharacterSelectionModal").addClass('hiddenElement');
                 togglePlayerTurn();
-                }, 2500);
+                }, 2000);
             
         }
         currentPlayerStatus = !currentPlayerStatus;    
@@ -111,15 +111,17 @@ function characterClicked() {
 function togglePlayerTurn(){
     //current player has finish his/her turn and currentplayer switches before toggle is called.
     //if player one finish his turn. then toggle switches to player 2 and calls the modal and sets current player.
-
+    cancelHurryUp();
     setTimeout(function(){
       if(currentPlayerStatus){
         currentPlayer = player1;
+        hurryUp();
         $(".playerTurnModal .playerName").text(currentPlayer.name);
         $('#player1').addClass('highlightCurrentPlayer');
         $('#player2').removeClass('highlightCurrentPlayer');
       } else {
           currentPlayer = player2;
+          hurryUp();
           $(".playerTurnModal .playerName").text(currentPlayer.name);
           $('#player2').addClass('highlightCurrentPlayer');
           $('#player1').removeClass('highlightCurrentPlayer');
@@ -289,6 +291,7 @@ function usePowerup(inputPowerUpName){
             for (var indexRow = 0; indexRow < 6;indexRow++){
                 gameBoardArray[randomNum7].push(''); //put back empty ''
             }
+            fireballSound.play();
             console.log('got rid of col: ' + randomNum7);
             var elementCall = '.tokenDropArea[column='+randomNum7+']';
             $(elementCall).addClass('fireBallCol');
@@ -342,6 +345,9 @@ function resetGame(){
     //full reset of the game, reset their powerup, and wipe the board clean
     player1.powerupHeld = false;
     player2.powerupHeld = false;
+    resetSound.play();
+    cancelHurryUp();
+    bgMusic.pause();
     updateDOM('clean');
 
 }
@@ -349,10 +355,28 @@ function resetGame(){
 var bgMusic = new Audio('audio/MarioBros.mp3');   
 var coinDrop = new Audio('audio/coin.wav'); 
 var powerUp = new Audio('audio/powerUp.mp3'); 
+var starMusic = new Audio('audio/star.mp3');
+var resetSound = new Audio('audio/reset.mp3');
+var fireballSound = new Audio('audio/fireball.mp3');
+var playStarMusic = null;
+
 function bgMusicPlay(){
     bgMusic.play();
     bgMusic.loop=true;
 }
 function bgMusicPause(){
   bgMusic.pause();
+}
+function hurryUp() {
+    playStarMusic = setTimeout(function(){ 
+        starMusic.play();
+        starMusic.loop=true;
+        bgMusic.pause();
+     }, 10000);
+}
+function cancelHurryUp() {
+    starMusic.pause();
+    bgMusic.play();
+    starMusic.currentTime = 0
+    clearTimeout(playStarMusic);
 }
