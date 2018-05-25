@@ -1,0 +1,337 @@
+/* Placeholder for fontface */
+@font-face {
+    font-family: 'SuperMario256';
+    src: url('fonts/SuperMario256.eot'),
+        url('fonts/SuperMario256.woff2') format('woff2'),
+        url('fonts/SuperMario256.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'SuperMarioGalaxy';
+    src: url('fonts/SuperMarioGalaxy.woff') format('woff'),
+         url('fonts/SuperMarioGalaxy.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+/* Main Layout Styling Classes */
+body {
+    width: 100%;
+    margin: 0;
+    font-family: 'SuperMario256';
+    position: relative;
+}
+.mainContainer {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    background-image: url(images/mario-bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+}
+.header {
+    height: 9vmin;
+    width: 100%;
+    background-color: rgba(15, 10, 58, 0.65);
+    color: white;
+}
+.header h1 {
+    margin: 0;
+    padding-top: 2vmin;
+    margin-bottom: 0;
+    font-size: 5vmin;
+}
+.footer {
+    position: relative;
+    height: 9vmin;
+    width: 100%;
+    background-color: rgba(15, 10, 58, 0.95);
+    color: white;
+}
+.footer:before {
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+}
+.sideBar {
+    display: inline-block;
+    height: 81vmin;
+    width: 8%;
+    margin: auto;
+}
+#gameBoard {
+    display: inline-grid;
+    height: 82vmin;
+    width: 81%;
+    margin: auto;
+    grid-template-columns: repeat(7, 1fr);
+    grid-column-gap: 1vmin;
+    vertical-align: top;
+}
+#gameBoard > div {
+    border: black dashed 1px;
+    width: 100%;
+    height: 100%; 
+}
+#gameBoard > div > div {
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#gameBoard > div > .tokenDropArea {
+}
+.column {
+    display: inline-grid;
+    background-image: url(images/pipe.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+    grid-template-rows: repeat(7, 1fr); 
+    width: 100%;
+    height: 70vmin;  
+}
+.column:hover {
+    box-shadow: 0px 0px 40px 10px white;
+}
+.column div img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+/* Player Related Classes */
+.playerColumn{
+    display: inline-block;
+    margin-left: 3vmin;
+    margin-right: 3vmin;    
+}
+.playerColumn h1{
+    display: inline-block;
+    vertical-align: middle;
+}
+.characterImg{
+    display: inline-block;
+    height: 7vmin;
+    width: 7vmin;
+    margin: auto;
+    vertical-align: middle;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 100%;
+}
+.highlightCurrentPlayer h1 {
+    text-shadow: 0px 0px 7px white;
+    border-bottom: white dashed 3px;
+    letter-spacing: .5vmin;
+}
+.playerTurnModal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: rgba(15, 10, 58, 0.95);
+}
+.playerTurnModal h1 {
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    color: white;
+    font-size: 10vmin;
+    text-shadow: 4px 4px 5px black;
+    text-align: center;
+    vertical-align: middle;
+}
+.playerCharacterSelectionModal {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: rgba(15, 10, 58, 0.95);
+}
+.playerCharacterSelectionModal h1 {
+    position: absolute; 
+    display: inline-block;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    color: white;
+    font-size: 10vmin;
+    text-shadow: 4px 4px 5px black;
+    text-align: center;
+    vertical-align: middle;
+}
+.character1 {
+    position: absolute;
+    top: 5%;
+    display: inline-block;
+}
+.character2 {
+    position: absolute;
+    top: 75%;
+    display: inline-block;
+}
+
+/* Power Up Classes */
+.animatePowerupButton{
+    animation: sway 2.5s infinite;
+    box-shadow: 0px 0px 40px 10px white;
+    border-radius: 100%;
+}
+
+@keyframes sway {
+    0%   {transform: rotate(-25deg) scale(1.25,1.25);}
+    25%   {transform: rotate(0deg) scale(1,1);}
+    50%	 {transform: rotate(25deg) scale(1.25,1.25);}
+    75%	 {transform: rotate(0deg) scale(1,1);}
+    100% {transform: rotate(-25deg) scale(1.25,1.25);}
+}
+
+/* Reset Classes */
+.resetGame{
+    cursor: pointer;
+}
+
+/* Modal Classes */
+.beginGameModal{ 
+}
+.gameWinModal{ 
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: rgba(15, 10, 58, 0.95);
+}
+.gameWinModal h1 {
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    color: white;
+    font-size: 8vmin;
+    text-shadow: 4px 4px 5px black;
+    text-align: center;
+    vertical-align: middle
+}
+.gameWinModal h2 {
+    position: absolute; 
+    top: 75%;
+    left: 50%;
+    margin: auto;
+    color: white;
+    font-size: 6vmin;
+    text-shadow: 4px 4px 5px black;
+    text-align: center;
+}
+.gameStart { 
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: rgba(15, 10, 58, 0.95);
+}
+.gameStart h1 {
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    color: white;
+    font-size: 8vmin;
+    text-shadow: 4px 4px 5px black;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    
+}
+.hiddenElement {
+    display: none;
+}
+
+
+/*Character Classes
+these class is linked to character object .characterToken*/
+
+.mario{
+    background-image: url("images/TokenPng/MarioToken.png");
+}
+
+.luigi{
+    background-image: url("images/TokenPng/LuigiToken.png");
+}
+
+.fireBallCol{
+    position: relative;
+    top:-100vh;
+    background-image: url("images/fireBall.png");
+    animation: dropFireBall 1.5s;
+    transform: scale(5,5);
+}
+
+@keyframes dropFireBall {
+    0%   {top:-20vh;}
+    100% {top:120vh;}
+}
+
+.rowHiddenFireBall{
+    position: absolute;
+    bottom:10vh;
+    left: -20vw;
+    width: 10vh;
+    height: 10vh;
+}
+.fireBallRow{
+    background-image: url("images/fireBall.png");
+    background-size: contain;
+    animation: RowFireBall 1.5s;
+    transform: scale(4,4) rotate(270deg);
+}
+
+@keyframes RowFireBall {
+    0%   {left:-20vw;}
+    100% {left:120vw;}
+}
+
+/* Media Query Classes */
+@media screen and (max-width: 480px) {
+    .sideBar {
+        display: none;
+    }
+    #gameBoard {
+        width: 100%; 
+    }
+}

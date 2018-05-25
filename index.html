@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Connect 4 - Classic Mario Style</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/favicon.png" type="image/png" >
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="playerProfile.js"></script>
+    <script src="main.js"></script>
+    
+</head>
+<body>
+
+    <div class="mainContainer">
+        <div class="header"><h1>Connect 4 - Mario Style</h1></div>
+        <div class="sideBar"></div>
+        <div id="gameBoard">
+            <div class="column column0" column="0">
+                <div class="tokenDropArea" row="6" column="0"></div>
+                <div row="5" column="0"></div>
+                <div row="4" column="0"></div>
+                <div row="3" column="0"></div>
+                <div row="2" column="0"></div>
+                <div row="1" column="0"></div>
+                <div row="0" column="0"></div>
+            </div>
+            <div class="column column1" column="1">
+                <div class="tokenDropArea" row="6" column="1"> </div>
+                <div row="5" column="1"> </div>
+                <div row="4" column="1"> </div>
+                <div row="3" column="1"> </div>
+                <div row="2" column="1"> </div>
+                <div row="1" column="1"> </div>
+                <div row="0" column="1"> </div>
+            </div>
+            <div class="column column2" column="2">
+                <div class="tokenDropArea" row="6" column="2"> </div>
+                <div row="5" column="2"> </div>
+                <div row="4" column="2"> </div>
+                <div row="3" column="2"> </div>
+                <div row="2" column="2"> </div>
+                <div row="1" column="2"> </div>
+                <div row="0" column="2"> </div>
+            </div>
+            <div class="column column3" column="3">
+                <div class="tokenDropArea" row="6" column="3"> </div>
+                <div row="5" column="3"> </div>
+                <div row="4" column="3"> </div>
+                <div row="3" column="3"> </div>
+                <div row="2" column="3"> </div>
+                <div row="1" column="3"> </div>
+                <div row="0" column="3"> </div>
+            </div>
+            <div class="column column4" column="4">
+                <div class="tokenDropArea" row="6" column="4"> </div>
+                <div row="5" column="4"> </div>
+                <div row="4" column="4"> </div>
+                <div row="3" column="4"> </div>
+                <div row="2" column="4"> </div>
+                <div row="1" column="4"> </div>
+                <div row="0" column="4"> </div>
+            </div>
+            <div class="column column5" column="5">
+                <div class="tokenDropArea" row="6" column="5"> </div>
+                <div row="5" column="5"> </div>
+                <div row="4" column="5"> </div>
+                <div row="3" column="5"> </div>
+                <div row="2" column="5"> </div>
+                <div row="1" column="5"> </div>
+                <div row="0" column="5"> </div>
+            </div>
+            <div class="column column6" column="6">
+                <div class="tokenDropArea" row="6" column="6"> </div>
+                <div row="5" column="6"> </div>
+                <div row="4" column="6"> </div>
+                <div row="3" column="6"> </div>
+                <div row="2" column="6"> </div>
+                <div row="1" column="6"> </div>
+                <div row="0" column="6"> </div>
+            </div>
+        </div>
+        <div class="sideBar"></div>
+
+        <div class="footer">
+            <div id="player1" class="playerColumn">
+                <h1>Player 1</h1>
+                <img class="player1TokenShowing characterImg">
+            </div>
+            <div class="playerColumn resetGame"><h1>Reset Game</h1></div>
+            <div id="player2" class="playerColumn">
+                <h1>Player 2</h1>
+                <img class="player2TokenShowing characterImg">
+            </div>
+            
+        </div>
+        <div class="playerTurnModal hiddenElement">
+            <h1>It is <span class='playerName'>Player 1</span>'s turn!</h1>
+        </div>
+        <div class="playerCharacterSelectionModal hiddenElement">
+                <img class="character character1" name = "mario" src="images/TokenPng/MarioToken.png" alt="Mario">
+            <h1>Player 1, Choose your character!</h1>
+            <img class="character character2" name = "luigi" src="images/TokenPng/LuigiToken.png" alt="Luigi">
+        </div>
+        <div class="gameStart">
+            <h1>Are you ready to Connect 4??</h1>
+        </div>
+        <div class="gameWinModal hiddenElement">
+            <h1>Congratulations <span class='playerName'></span>!! You've won! However, your princess is in another castle.</h1>
+            <h2 class="resetGame">Care to try again?</h2>
+        </div>
+    </div>
+
+    <div class="rowHiddenFireBall"></div>
+</body>
+</html>
