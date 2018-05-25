@@ -67,7 +67,6 @@ body {
     width: 81%;
     margin: auto;
     grid-template-columns: repeat(7, 1fr);
-    /* background-color: rgba(15, 10, 58, 0.35); */
     grid-column-gap: 1vmin;
     vertical-align: top;
 }
@@ -183,31 +182,18 @@ body {
     text-align: center;
     vertical-align: middle;
 }
-/* .playerCharacterSelectionModal img {
-    position: absolute; 
-    display: inline-block;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-} */
 .character1 {
-    position: relative;
+    position: absolute;
     top: 5%;
     display: inline-block;
 }
 .character2 {
-    position: relative;
-    top: 55%;
+    position: absolute;
+    top: 75%;
     display: inline-block;
 }
 
-/* Token Falling animation */
-
 /* Power Up Classes */
-.player1PowerUpBoardHighlight {
-}
-.player2PowerUpBoardHighlight {
-}
 .animatePowerupButton{
     animation: sway 2.5s infinite;
     box-shadow: 0px 0px 40px 10px white;
