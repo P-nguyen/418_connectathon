@@ -124,7 +124,7 @@ body {
     border-radius: 100%;
 }
 .highlightCurrentPlayer h1 {
-    text-shadow: 0px 0px 7px white;
+    text-shadow: 0px 0px 4vmin red;
     border-bottom: white dashed 3px;
     letter-spacing: .5vmin;
 }
@@ -305,6 +305,21 @@ these class is linked to character object .characterToken*/
 @keyframes dropFireBall {
     0%   {top:-20vh;}
     100% {top:120vh;}
+}
+
+.dropIt {
+    animation: dropCoin 0.75s;
+    animation-direction: reverse;
+    animation-fill-mode: backwards;
+}
+
+@keyframes dropCoin {
+    0%   {
+        position: relative;
+        bottom: 0;}
+    100% {
+        position: relative;
+        bottom: 80vh;}
 }
 
 .rowHiddenFireBall{

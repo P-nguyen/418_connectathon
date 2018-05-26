@@ -125,7 +125,7 @@ function togglePlayerTurn(){
           $(".playerTurnModal").addClass('hiddenElement');
           screenClickable = true;
           }, 1000);
-      }, 750);
+      }, 1300); //need to fine tune the wait time a bit
 }
 
 //########################################## TOKEN PLACEMENT ###################################
@@ -268,7 +268,7 @@ function showTokenOnDOM( inputColLocation, inputRowLocation){
     coinDrop.play();
     var col = '[column='+inputColLocation+'][row='+inputRowLocation+']';
     $(col).addClass(currentPlayer.characterType.characterToken);
-
+    dropCoin(inputColLocation,inputRowLocation); //give it dropCoin animation
 }
 
 
@@ -345,6 +345,7 @@ function resetGame(){
     cancelHurryUp();
     bgMusic.pause();
     $(".gameWinModal").addClass('hiddenElement');
+    lotsOfFire(); //firedrop animation
     updateDOM('clean');
 
 }
@@ -376,4 +377,24 @@ function cancelHurryUp() {
     bgMusic.play();
     starMusic.currentTime = 0
     clearTimeout(playStarMusic);
+}
+
+function dropCoin(col,row){
+    var colRowPosition= '[column='+col+'][row='+row+']';
+    $(colRowPosition).addClass('dropIt');
+    setTimeout(function(){($(colRowPosition).removeClass('dropIt'))},1000);
+}
+
+function lotsOfFire(){
+    fireballSound.play();
+    for (var column = 0; column < gameBoardArray.length; column++){
+        var elementCall = '.tokenDropArea[column='+column+']';
+        $(elementCall).addClass('fireBallCol');
+        delayRemoveFire(elementCall);
+    }
+}
+
+function delayRemoveFire(column){
+    //have to do a separate function outside of the loop to avoid timing issue calling function
+    setTimeout(function(){$(column).removeClass('fireBallCol')},1000);
 }
