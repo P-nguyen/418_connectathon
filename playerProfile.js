@@ -26,7 +26,7 @@ var characters = {
         // characterWinSound: blank,
         characterToken: 'luigi',
         characterIdleImage: 'images/marioIdle.gif',
-        powerupClass: 'fireBallRow',
+        powerupClass: 'bulletBillRow',
         powerupPattern: [[[0,1],[1,0]],
                         [[0,-1],[1,-1]],
                         [[-1,1],[-1,0]]] //L pattern
