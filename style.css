@@ -322,21 +322,21 @@ these class is linked to character object .characterToken*/
         bottom: 80vh;}
 }
 
-.rowHiddenFireBall{
+.rowHiddenBulletBill{
     position: absolute;
     bottom:10vh;
     left: -20vw;
     width: 10vh;
     height: 10vh;
 }
-.fireBallRow{
-    background-image: url("images/fireBall.png");
+.bulletBillRow{
+    background-image: url("images/bulletBill.png");
     background-size: contain;
-    animation: RowFireBall 1.5s;
-    transform: scale(4,4) rotate(270deg);
+    animation: rowBulletBill 1.5s;
+    transform: scale(4,4);
 }
 
-@keyframes RowFireBall {
+@keyframes rowBulletBill {
     0%   {left:-20vw;}
     100% {left:120vw;}
 }

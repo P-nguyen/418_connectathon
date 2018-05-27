@@ -7,7 +7,7 @@ var player2 = null;
 
 var currentPlayer = player1;
 var currentPlayerStatus = true; // true is player 1 and false is player 2
-var screenClickable = true;
+var screenClickable = false;
 
 
 
@@ -73,7 +73,7 @@ function powerupButtonClicked(){
         }else{
             $('#player2 img').removeClass('animatePowerupButton');
         }
-        updateDOM();
+        setTimeout(updateDOM,1300);
     }
 }
 
@@ -95,7 +95,7 @@ function characterClicked() {
             setTimeout(function(){
                 $(".playerCharacterSelectionModal").addClass('hiddenElement');
                 togglePlayerTurn();
-                }, 2000);
+                }, 2000);// originally 2000 || change to 3300 to account for toggleplayerturn Time difference.
             
         }
         currentPlayerStatus = !currentPlayerStatus;    
@@ -106,26 +106,26 @@ function togglePlayerTurn(){
     //current player has finish his/her turn and currentplayer switches before toggle is called.
     //if player one finish his turn. then toggle switches to player 2 and calls the modal and sets current player.
     cancelHurryUp();
-    setTimeout(function(){
-      if(currentPlayerStatus){
+
+    if(currentPlayerStatus){
         currentPlayer = player1;
         hurryUp();
         $(".playerTurnModal .playerName").text(currentPlayer.name);
         $('#player1').addClass('highlightCurrentPlayer');
         $('#player2').removeClass('highlightCurrentPlayer');
-      } else {
+    } else {
           currentPlayer = player2;
           hurryUp();
           $(".playerTurnModal .playerName").text(currentPlayer.name);
           $('#player2').addClass('highlightCurrentPlayer');
           $('#player1').removeClass('highlightCurrentPlayer');
-      }
-      $(".playerTurnModal").removeClass('hiddenElement');
-      setTimeout(function(){
-          $(".playerTurnModal").addClass('hiddenElement');
-          screenClickable = true;
-          }, 1000);
-      }, 1300); //need to fine tune the wait time a bit
+    }
+    $(".playerTurnModal").removeClass('hiddenElement');
+    setTimeout(function(){
+        $(".playerTurnModal").addClass('hiddenElement');
+        screenClickable = true;
+        }, 1000);
+
 }
 
 //########################################## TOKEN PLACEMENT ###################################
@@ -149,7 +149,7 @@ function tokenPlacementCheck( inputPlayer, inputStartCol, inputStartRow ) {
     if(!winResult){
         currentPlayerStatus = !currentPlayerStatus;
         screenClickable = false;
-        togglePlayerTurn();
+        setTimeout(togglePlayerTurn, 1300);
 
 
     }
@@ -296,8 +296,8 @@ function usePowerup(inputPowerUpName){
                 gameBoardArray[indexCol].push('');
             }
             fireballSound.play();
-            $('.rowHiddenFireBall').addClass('fireBallRow');
-            setTimeout(function(){$('.rowHiddenFireBall').removeClass('fireBallRow')},1500);
+            $('.rowHiddenBulletBill').addClass('bulletBillRow');
+            setTimeout(function(){$('.rowHiddenBulletBill').removeClass('bulletBillRow')},1500);
             break;
     }
 
