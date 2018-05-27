@@ -95,8 +95,7 @@ function characterClicked() {
             setTimeout(function(){
                 $(".playerCharacterSelectionModal").addClass('hiddenElement');
                 togglePlayerTurn();
-                }, 2000);// originally 2000 || change to 3300 to account for toggleplayerturn Time difference.
-            
+                }, 2000);
         }
         currentPlayerStatus = !currentPlayerStatus;    
     } 
