@@ -341,6 +341,31 @@ these class is linked to character object .characterToken*/
     100% {left:120vw;}
 }
 
+.onTop{
+    position: relative;
+    text-shadow: 0px 0px 4vmin red;
+    z-index: 1}
+
+.cloud{
+    float: left;
+    position: relative;
+    height: 9vmin;
+    width: 9vmin;
+    top: 0;
+    background-image: url("images/Lakitu_cloud.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: cloud 12s infinite;
+}
+
+@keyframes cloud {
+    0%   {left: 10vw;}
+    25%  {left: 47vw;}
+    50%  {left: 87vw;}
+    75%  {left: 47vw;}
+    100% {left: 10vw;}
+}
+
 /* Media Query Classes */
 @media screen and (max-width: 480px) {
     .sideBar {
