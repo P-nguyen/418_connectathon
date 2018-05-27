@@ -179,6 +179,9 @@ body {
     text-shadow: 4px 4px 5px black;
     text-align: center;
 }
+.playerCharacterSelectionModal h2 {
+    margin: 3vmin;
+}
 .characterChoiceText {
     margin: auto;
     grid-column: 1 / 4;
@@ -186,6 +189,11 @@ body {
 }
 .characterContainer {
     margin: auto;
+}
+.selectGrid > div {
+    margin: auto;
+    color: white;
+
 }
 
 /* Power Up Classes */
