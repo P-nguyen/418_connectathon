@@ -83,19 +83,36 @@ function characterClicked() {
         if(currentPlayerStatus){
             player1 = new Player(characterClicked, characters[characterClicked]);
             player1.characterType.characterSound1.play();
-            $(this).addClass("hiddenElement");
+            if(player1.name === 'mario'){
+                $(".p1Notes").removeClass("hiddenElement");
+                // $(this).addClass("hiddenElement");
+                $('.p1Power img').removeClass("hiddenElement"); 
+            } else {
+                $(".p2Notes").removeClass('hiddenElement');
+                // $(this).addClass("hiddenElement");
+                $('.p2Power img').removeClass("hiddenElement");
             $("#player1 img").addClass(characterClicked);
             $(".playerCharacterSelectionModal h1").text('Player 2, Choose your character!');
-        } else {   
+                } 
+            }
+        else {   
             player2 = new Player(characterClicked, characters[characterClicked]);
             player2.characterType.characterSound1.play();
-            $(this).addClass("hiddenElement");
+            if(player2.name === 'luigi'){
+                $(".p2Notes").removeClass('hiddenElement');
+                // $(this).addClass("hiddenElement");
+                $('.p2Power img').removeClass("hiddenElement");
+            } else {
+                $(".p1Notes").removeClass("hiddenElement");
+            // $(this).addClass("hiddenElement");
+                $('.p1Power img').removeClass("hiddenElement");
+            }       
             $("#player2 img").addClass(characterClicked);
             $(".playerCharacterSelectionModal h1").text('Let\'s Play!');
             setTimeout(function(){
                 $(".playerCharacterSelectionModal").addClass('hiddenElement');
                 togglePlayerTurn();
-                }, 2000);
+                }, 3000);
         }
         currentPlayerStatus = !currentPlayerStatus;    
     } 
