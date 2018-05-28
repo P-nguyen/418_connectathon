@@ -83,30 +83,18 @@ function characterClicked() {
         if(currentPlayerStatus){
             player1 = new Player(characterClicked, characters[characterClicked]);
             player1.characterType.characterSound1.play();
-            if(player1.name === 'mario'){
-                $(".p1Notes").removeClass("hiddenElement");
-                // $(this).addClass("hiddenElement");
-                $('.p1Power img').removeClass("hiddenElement"); 
-            } else {
-                $(".p2Notes").removeClass('hiddenElement');
-                // $(this).addClass("hiddenElement");
-                $('.p2Power img').removeClass("hiddenElement");
+            $('.p1Notes').text(player1.name + ', you have a special powerup! Connect your tokens to recieve a special advantage.');
+            $(".p1PowerImage").append(`<img src= "${player1.characterType.powerupImage}" class= "p1Notes"/>`);
+            $(this).addClass("selectedCharacterHighlight");
             $("#player1 img").addClass(characterClicked);
             $(".playerCharacterSelectionModal h1").text('Player 2, Choose your character!');
-                } 
-            }
+        }
         else {   
             player2 = new Player(characterClicked, characters[characterClicked]);
             player2.characterType.characterSound1.play();
-            if(player2.name === 'luigi'){
-                $(".p2Notes").removeClass('hiddenElement');
-                // $(this).addClass("hiddenElement");
-                $('.p2Power img').removeClass("hiddenElement");
-            } else {
-                $(".p1Notes").removeClass("hiddenElement");
-            // $(this).addClass("hiddenElement");
-                $('.p1Power img').removeClass("hiddenElement");
-            }       
+            $('.p2Notes').text(player2.name + ', you have a special powerup! Connect your tokens to recieve a special advantage.');
+            $(".p2PowerImage").append(`<img src= "${player2.characterType.powerupImage}" class= "p2Notes"/>`);
+            $(this).addClass("selectedCharacterHighlight");
             $("#player2 img").addClass(characterClicked);
             $(".playerCharacterSelectionModal h1").text('Let\'s Play!');
             setTimeout(function(){
@@ -122,7 +110,6 @@ function togglePlayerTurn(){
     //current player has finish his/her turn and currentplayer switches before toggle is called.
     //if player one finish his turn. then toggle switches to player 2 and calls the modal and sets current player.
     cancelHurryUp();
-
     if(currentPlayerStatus){
         currentPlayer = player1;
         hurryUp();
