@@ -169,28 +169,57 @@ function validPosition(targetCol,targetRow){
         }
 }
 
+function powerupPatternGlow( inputColRowArray ){
+    //takes in an nested array with col and row positions.
+    //returns: nothing.
+    var tokenPos;
+
+    for (var i = 0; i<3; i++) {
+        tokenPos = '[column='+inputColRowArray[i][0]+'][row='+inputColRowArray[i][1]+']';
+        $(tokenPos).addClass('animatePowerupButton');
+        setTimeout(removePatternGlow, 1300, tokenPos);
+        //1300 timeout is due to togglePlayer timeout.
+    }
+}
+
+function removePatternGlow(inputTokenPos){
+    $(inputTokenPos).removeClass('animatePowerupButton');
+}
+
+
 function powerupPatternCheck( inputPlayerToken, inputStartCol,inputStartRow ){
     //input parameters: inputPlayerToken(the X or O in the array we are looking for), inputStartCol(the Col position we are searching at), inputStartRow(the Row position we are searching at)
     //output parameters: true(if we found a powerup pattern), false(if we didn't find a powerup pattern)
 
     var patt = inputPlayerToken.characterType.powerupPattern;
     var playerToken = inputPlayerToken.characterType.name;
+    var tokenPosArray = [[inputStartCol, inputStartRow],[],[]]
 
     var foundPowerupPattern = false;
     if ( (validPosition(inputStartCol + patt[0][0][0],inputStartRow + patt[0][0][1]) === playerToken) && (validPosition(inputStartCol + patt[0][1][0],inputStartRow + patt[0][1][1]) === playerToken) ){
         //1st check
         foundPowerupPattern = true;
+        tokenPosArray[1].push(inputStartCol + patt[0][0][0],inputStartRow + patt[0][0][1]);
+        tokenPosArray[2].push(inputStartCol + patt[0][1][0],inputStartRow + patt[0][1][1]);
     } else if ( (validPosition(inputStartCol + patt[1][0][0],inputStartRow + patt[1][0][1]) === playerToken) && (validPosition(inputStartCol + patt[1][1][0],inputStartRow + patt[1][1][1]) === playerToken) ){
         //2nd check
         foundPowerupPattern = true;
+        tokenPosArray[1].push(inputStartCol + patt[1][0][0],inputStartRow + patt[1][0][1]);
+        tokenPosArray[2].push(inputStartCol + patt[1][1][0],inputStartRow + patt[1][1][1]);
     } else if ( (validPosition(inputStartCol + patt[2][0][0],inputStartRow + patt[2][0][1]) === playerToken) && (validPosition(inputStartCol + patt[2][1][0],inputStartRow + patt[2][1][1]) === playerToken) ){
         //3rd check
         foundPowerupPattern = true;
+        tokenPosArray[1].push(inputStartCol + patt[2][0][0],inputStartRow + patt[2][0][1]);
+        tokenPosArray[2].push(inputStartCol + patt[2][1][0],inputStartRow + patt[2][1][1]);
     }
+
     if ( validPosition(inputStartCol,inputStartRow) != playerToken ){
         foundPowerupPattern = false;
         //error checking to see if the selected position is the same as playerToken
         //shouldn't need this since we should always pass in perfect input
+    }
+    if (foundPowerupPattern){
+        powerupPatternGlow(tokenPosArray);
     }
     return foundPowerupPattern;
 }
