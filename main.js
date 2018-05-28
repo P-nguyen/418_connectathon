@@ -350,7 +350,17 @@ function resetGame(){
     $(".gameWinModal").addClass('hiddenElement');
     lotsOfFire(); //firedrop animation
     updateDOM('clean');
+    
+    setTimeout(function(){
+        $('.playerCharacterSelectionModal').removeClass('hiddenElement');
+        setTimeout(function(){
+            $(".playerCharacterSelectionModal").addClass('hiddenElement');
+            togglePlayerTurn();
+            }, 2000);
+        }, 2000);
 
+    
+    
 }
 // Sounds
 var bgMusic = new Audio('audio/MarioBros.mp3');   
