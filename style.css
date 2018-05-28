@@ -125,7 +125,7 @@ body {
     border-radius: 100%;
 }
 .highlightCurrentPlayer h1 {
-    text-shadow: 0px 0px 4vmin red;
+    text-shadow: 0px 0px 4vmin rgb(0, 160, 14);
     border-bottom: white dashed 3px;
     letter-spacing: .5vmin;
 }
@@ -155,11 +155,12 @@ body {
     vertical-align: middle;
 }
 .playerCharacterSelectionModal {
+    z-index: 10;
     position: fixed;
     display: grid;
     grid-template-rows: repeat(3, 1fr);
-    grid-template-columns: repeat(3, 1fr);
-    /* grid-gap: 1vmin; */
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1vmin;
     left: 0;
     top: 0;
     bottom: 0;
@@ -170,6 +171,10 @@ body {
     max-width: 100%;
     max-height: 100%;
     background-color: rgba(15, 10, 58, 0.95);
+}
+.selectedCharacterHighlight {
+    box-shadow: 0px 0px 40px 10px white;
+    border-radius: 50%;
 }
 .playerCharacterSelectionModal h1 {
     display: inline-block;
@@ -184,11 +189,12 @@ body {
 }
 .characterChoiceText {
     margin: auto;
-    grid-column: 1 / 4;
+    grid-column: 1 / 5;
     grid-row: 2 / 3;
 }
 .characterContainer {
     margin: auto;
+    grid-column: 2 / 4;
 }
 .selectGrid > div {
     margin: auto;
@@ -217,8 +223,6 @@ body {
 }
 
 /* Modal Classes */
-.beginGameModal{ 
-}
 .gameWinModal{ 
     position: fixed;
     left: 0;
@@ -296,6 +300,13 @@ these class is linked to character object .characterToken*/
 .luigi{
     background-image: url("images/TokenPng/LuigiToken.png");
 }
+.wario{
+    background-image: url("images/TokenPng/WarioToken.png");
+}
+
+.bowser{
+    background-image: url("images/TokenPng/BowserToken.png");
+}
 
 .fireBallCol{
     position: relative;
@@ -346,7 +357,7 @@ these class is linked to character object .characterToken*/
 
 .onTop{
     position: relative;
-    text-shadow: 0px 0px 4vmin red;
+    text-shadow: 0px 0px 4vmin rgb(0, 160, 14);
     z-index: 1}
 
 .cloud{
