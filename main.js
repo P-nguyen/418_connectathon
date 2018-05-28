@@ -87,6 +87,7 @@ function characterClicked() {
             $(".p1PowerImage").append(`<img src= "${player1.characterType.powerupImage}" class= "p1Notes"/>`);
             $(this).addClass("selectedCharacterHighlight");
             $("#player1 img").addClass(characterClicked);
+            $(this).off('click');//debug fixed multiple clicks on the same player
             $(".playerCharacterSelectionModal h1").text('Player 2, Choose your character!');
         }
         else {   
@@ -96,6 +97,7 @@ function characterClicked() {
             $(".p2PowerImage").append(`<img src= "${player2.characterType.powerupImage}" class= "p2Notes"/>`);
             $(this).addClass("selectedCharacterHighlight");
             $("#player2 img").addClass(characterClicked);
+            $(this).off('click');//debug fixed multiple clicks on the same player
             $(".playerCharacterSelectionModal h1").text('Let\'s Play!');
             setTimeout(function(){
                 $(".playerCharacterSelectionModal").addClass('hiddenElement');
@@ -149,7 +151,9 @@ function tokenPlacementCheck( inputPlayer, inputStartCol, inputStartRow ) {
     }
 
     var winResult = winPatternCheck( playerToken, inputStartCol, inputStartRow  );
-    if(!winResult){
+    if (winResult==='tie'){
+        $(".tieGame").removeClass('hiddenElement');
+    } else if(!winResult){
         currentPlayerStatus = !currentPlayerStatus;
         screenClickable = false;
         setTimeout(togglePlayerTurn, 1300);
@@ -226,7 +230,7 @@ function powerupPatternCheck( inputPlayerToken, inputStartCol,inputStartRow ){
 
 function winPatternCheck( inputPlayerToken, inputStartCol, inputStartRow ){
     //takes: in inputplayer token, current token positionX and Y
-    //outputs: returns true and and false. if current player wins or not.
+    //outputs: returns true, false, and 'tie'. if current player wins or not. 'tie' when output is false && no more spaces on board
 
     // this will set direction clockwise = starting at 12:00 || X,Y
     var result = false;
@@ -271,6 +275,18 @@ function winPatternCheck( inputPlayerToken, inputStartCol, inputStartRow ){
             }
         }
     }
+    //check for tie game condition
+    var openSpacesBoard = 0;
+    for (var index in gameBoardArray){
+        if (gameBoardArray[index][5] === ""){
+            openSpacesBoard++;
+        }
+    }
+    if ((result === false) && (openSpacesBoard === 0)){
+        //no open spaces left on the top row
+        return 'tie';
+    }
+
     return result;
 }
 
@@ -312,7 +328,7 @@ function usePowerup(inputPowerUpName){
         case 'delCol' :
             var randomNum7;
             var columnsInGame = gameBoardArray.length;
-            randomNum7 = Math.floor((Math.random())*(gameBoardArray.length));
+            randomNum7 = Math.floor((Math.random())*(columnsInGame));
             gameBoardArray[randomNum7].splice(0); //removes entire column contents
             for (var indexRow = 0; indexRow < 6;indexRow++){
                 gameBoardArray[randomNum7].push(''); //put back empty ''
@@ -353,7 +369,6 @@ function updateDOM(wipe){
             if (wipe === 'clean'){
                 gameBoardArray[colIndex][rowIndex] = '';
             } else {
-                //make sure Luigi is player2!!!!!!!!!!!!!!!!!!!
                 if (gameBoardArray[colIndex][rowIndex] === player1.characterType.name) {
                     $(colRow).addClass(player1.characterType.characterToken);
                 } else if (gameBoardArray[colIndex][rowIndex] === player2.characterType.name) {
@@ -377,6 +392,7 @@ function resetGame(){
     cancelHurryUp();
     bgMusic.pause();
     $(".gameWinModal").addClass('hiddenElement');
+    $(".tieGame").addClass('hiddenElement');
     lotsOfFire(); //firedrop animation
     updateDOM('clean');
     
@@ -417,7 +433,7 @@ function hurryUp() {
 function cancelHurryUp() {
     starMusic.pause();
     bgMusic.play();
-    starMusic.currentTime = 0
+    starMusic.currentTime = 0;
     clearTimeout(playStarMusic);
 }
 
@@ -440,3 +456,15 @@ function delayRemoveFire(column){
     //have to do a separate function outside of the loop to avoid timing issue calling function
     setTimeout(function(){$(column).removeClass('fireBallCol')},1000);
 }
+
+// gameBoardArray = [
+//     ['Mario','Mario','Mario','Luigi','Luigi','Luigi'],
+//     ['Luigi','Luigi','Luigi','Mario','Mario','Mario'],
+//     ['Mario','Mario','Mario','Luigi','Luigi','Luigi'],
+//     ['Luigi','Luigi','Luigi','Mario','Mario',''],
+//     ['Mario','Mario','Mario','Luigi','Luigi','Luigi'],
+//     ['Luigi','Luigi','Luigi','Mario','Mario','Mario'],
+//     ['Mario','Mario','Mario','Luigi','Luigi','Luigi']
+// ];
+//console.table(gameBoardArray)
+//gameBoardArray testing for tie condition
