@@ -285,6 +285,41 @@ body {
     cursor: pointer;
     
 }
+.tieGame{
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: rgba(15, 10, 58, 0.95);
+}
+.tieGame h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    color: white;
+    font-size: 8vmin;
+    text-shadow: 4px 4px 5px black;
+    text-align: center;
+    vertical-align: middle
+}
+.tieGame h2 {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    margin: auto;
+    color: white;
+    font-size: 6vmin;
+    text-shadow: 4px 4px 5px black;
+    text-align: center;
+}
 .hiddenElement {
     display: none;
 }
