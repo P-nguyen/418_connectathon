@@ -1,13 +1,16 @@
 $(document).ready(loadDocument);
 
+
+
+
 //########################################## GLOBAL VARIABLES ###################################
 // Player Info
 var player1 = null;
 var player2 = null;
-
 var currentPlayer = player1;
 var currentPlayerStatus = true; // true is player 1 and false is player 2
 var screenClickable = false;
+
 
 
 
@@ -26,7 +29,6 @@ var gameBoardArray = [
 
 function loadDocument(){
     addClickHandlers();
-    
 }
 
 function addClickHandlers(){
@@ -428,7 +430,7 @@ function hurryUp() {
         starMusic.play();
         starMusic.loop=true;
         bgMusic.pause();
-     }, 10000);
+     }, 7000);
 }
 function cancelHurryUp() {
     starMusic.pause();
@@ -436,6 +438,14 @@ function cancelHurryUp() {
     starMusic.currentTime = 0;
     clearTimeout(playStarMusic);
 }
+// Needs an if statement to control when sound starts (not when modals are open)
+// function windowMusicPause(){
+//     $(window).focus(bgMusicPlay);
+//     $(window).focus(hurryUp);
+//     $(window).blur(cancelHurryUp);
+//     $(window).blur(bgMusicPause);
+// }
+
 
 function dropCoin(col,row){
     var colRowPosition= '[column='+col+'][row='+row+']';

@@ -141,6 +141,7 @@ body {
     max-width: 100%;
     max-height: 100%;
     background-color: rgba(15, 10, 58, 0.95);
+    user-select: none;
 }
 .playerTurnModal h1 {
     position: absolute; 
@@ -171,6 +172,7 @@ body {
     max-width: 100%;
     max-height: 100%;
     background-color: rgba(15, 10, 58, 0.95);
+    user-select: none;
 }
 .selectedCharacterHighlight {
     box-shadow: 0px 0px 40px 10px white;
@@ -235,6 +237,7 @@ body {
     max-width: 100%;
     max-height: 100%;
     background-color: rgba(15, 10, 58, 0.95);
+    user-select: none;
 }
 .gameWinModal h1 {
     position: absolute; 
@@ -270,6 +273,7 @@ body {
     max-width: 100%;
     max-height: 100%;
     background-color: rgba(15, 10, 58, 0.95);
+    user-select: none;
 }
 .gameStart h1 {
     position: absolute; 
