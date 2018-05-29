@@ -15,7 +15,7 @@ var characters = {
         powerupImage: 'images/marioPowerLayout.png',
         powerupPattern: [[[1,1],[2,0]],//[0][0][0],[0][0][1] || [0][1][0],[0][1][1]
                         [[-1,-1],[1,-1]],
-                        [[-1,1],[-2,0]]] //v pattern
+                        [[-1,1],[-2,0]]] //invert v pattern
     },
     luigi: {
         name: 'Luigi',
@@ -37,9 +37,9 @@ var characters = {
         characterTokenImage: 'images/TokenPng/WarioToken.png',
         powerupClass: 'fireBallCol',
         powerupImage: 'images/warioPowerLayout.png',
-        powerupPattern: [[[1,1],[2,0]],//[0][0][0],[0][0][1] || [0][1][0],[0][1][1]
-                        [[-1,-1],[1,-1]],
-                        [[-1,1],[-2,0]]] //v pattern
+        powerupPattern: [[[1,-1],[2,0]],
+                        [[-1,1],[1,1]],
+                        [[-2,0],[-1,-1]]] //v pattern
     },
     bowser: {
         name: 'Bowser',
@@ -49,9 +49,9 @@ var characters = {
         characterTokenImage: 'images/TokenPng/BowserToken.png',
         powerupClass: 'bulletBillRow',
         powerupImage: 'images/bowserPowerLayout.png',
-        powerupPattern: [[[0,1],[1,0]],
-                        [[0,-1],[1,-1]],
-                        [[-1,1],[-1,0]]] //L pattern
+        powerupPattern: [[[1,0],[1,-1]],
+                        [[-1,0],[0,-1]],
+                        [[-1,1],[0,1]]] //7 pattern
     },
 }
 
