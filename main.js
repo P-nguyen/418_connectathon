@@ -14,6 +14,7 @@ var screenClickable = false;
 
 
 
+
 var winCount = 4;//for connect 4 or even higher
 
 var gameBoardArray = [
@@ -105,6 +106,7 @@ function characterClicked() {
                 $(".playerCharacterSelectionModal").addClass('hiddenElement');
                 togglePlayerTurn();
                 }, 3000);
+            $(".playerCharacterSelectionModal img").off('click');
         }
         currentPlayerStatus = !currentPlayerStatus;    
     } 
