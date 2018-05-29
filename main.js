@@ -168,7 +168,7 @@ function validPosition(targetCol,targetRow){
     // parameters: targetCol, targetRow
     // return: value at position of gameBoardArray, or if outside then return null
 
-    if ( ((targetCol < 7) && (targetCol >= 0)) && (((targetCol >= 0)) && (targetRow < 6))){
+    if ( ((targetCol < 7) && (targetCol >= 0)) && (((targetRow >= 0)) && (targetRow < 6))){
         return gameBoardArray[targetCol][targetRow];
     } else {
             return null;

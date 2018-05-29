@@ -7,7 +7,7 @@ function Player(inputName, inputCharacterType){
 var characters = {
     mario: {
         name: 'Mario',
-        characterPowerup: 'delCol',//powerupPatternCheckInvertV,
+        characterPowerup: 'delCol',
         characterSound1: new Audio('audio/mario.mp3'),
         characterToken: 'mario',
         characterTokenImage: 'images/TokenPng/MarioToken.png',
@@ -19,7 +19,7 @@ var characters = {
     },
     luigi: {
         name: 'Luigi',
-        characterPowerup: 'delRow',//powerupPatternCheckL,
+        characterPowerup: 'delRow',
         characterSound1: new Audio('audio/luigi.mp3'),
         characterToken: 'luigi',
         characterTokenImage: 'images/TokenPng/LuigiToken.png',
@@ -31,7 +31,7 @@ var characters = {
     },
     wario: {
         name: 'Wario',
-        characterPowerup: 'delCol',//powerupPatternCheckInvertV,
+        characterPowerup: 'delCol',
         characterSound1: new Audio('audio/wario.wav'),
         characterToken: 'wario',
         characterTokenImage: 'images/TokenPng/WarioToken.png',
@@ -43,7 +43,7 @@ var characters = {
     },
     bowser: {
         name: 'Bowser',
-        characterPowerup: 'delRow',//powerupPatternCheckL,
+        characterPowerup: 'delRow',
         characterSound1: new Audio('audio/bowser.wav'),
         characterToken: 'bowser',
         characterTokenImage: 'images/TokenPng/BowserToken.png',
