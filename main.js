@@ -301,11 +301,9 @@ function dropTokenCol(inputPlayer, inputColLocation){
     var lastIteminCol = gameBoardArray[inputColLocation].indexOf('');
     if (lastIteminCol > -1){
         gameBoardArray[inputColLocation][lastIteminCol] = playerToken;
-
-        if ( lastIteminCol === gameBoardArray[inputColLocation].length -1){
-            //this is the last open space in the column so trigger something
-        }
-
+        // if ( lastIteminCol === gameBoardArray[inputColLocation].length -1){
+        //     //this is the last open space in the column so trigger something
+        // }
         showTokenOnDOM( inputColLocation, lastIteminCol );
         return lastIteminCol;
     }else {
